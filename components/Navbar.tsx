@@ -1,7 +1,12 @@
 
 import React from 'react';
+import { Instagram, MessageCircle } from 'lucide-react';
 
 const Navbar: React.FC = () => {
+  const whatsappNumber = "5547992460045";
+  const whatsappUrl = `https://wa.me/${whatsappNumber}`;
+  const instagramUrl = "https://www.instagram.com/itajaimetalprecision/";
+
   const handleScroll = (e: React.MouseEvent<HTMLAnchorElement>, id: string) => {
     e.preventDefault();
     const element = document.querySelector(id);
@@ -22,7 +27,29 @@ const Navbar: React.FC = () => {
               <span className="text-blue-500">ITAJAÍ</span> METAL<span className="text-blue-500 underline decoration-2 underline-offset-4">PRECISION</span>
             </span>
           </div>
-          <div className="hidden md:flex items-center space-x-8">
+          
+          <div className="hidden md:flex items-center space-x-6">
+            <div className="flex items-center gap-4 pr-6 border-r border-slate-800">
+              <a 
+                href={instagramUrl} 
+                target="_blank" 
+                rel="noopener noreferrer" 
+                className="text-slate-400 hover:text-pink-500 transition-all hover:scale-110"
+                title="Siga-nos no Instagram"
+              >
+                <Instagram className="w-5 h-5" />
+              </a>
+              <a 
+                href={whatsappUrl} 
+                target="_blank" 
+                rel="noopener noreferrer" 
+                className="text-slate-400 hover:text-green-500 transition-all hover:scale-110"
+                title="Fale conosco no WhatsApp"
+              >
+                <MessageCircle className="w-5 h-5" />
+              </a>
+            </div>
+
             <a href="#home" onClick={(e) => handleScroll(e, '#home')} className="text-slate-300 hover:text-blue-500 transition-colors font-medium">Início</a>
             <a href="#servicos" onClick={(e) => handleScroll(e, '#servicos')} className="text-slate-300 hover:text-blue-500 transition-colors font-medium">Serviços</a>
             <a href="#orcamento" onClick={(e) => handleScroll(e, '#orcamento')} className="text-slate-300 hover:text-blue-500 transition-colors font-medium">Orçamento</a>

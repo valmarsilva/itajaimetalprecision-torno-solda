@@ -4,11 +4,13 @@ import Navbar from './components/Navbar';
 import ServiceSection from './components/ServiceSection';
 import AIQuoteAssistant from './components/AIQuoteAssistant';
 import Diagnostics from './components/Diagnostics';
-import { Hammer, Cog, HardHat, Phone, Mail, MapPin, Instagram, Facebook, Clock, MessageCircle } from 'lucide-react';
+import { Hammer, Cog, HardHat, Phone, Mail, MapPin, Instagram, Facebook, Clock, MessageCircle, Truck, Sofa } from 'lucide-react';
 
 const App: React.FC = () => {
   const whatsappNumber = "5547992460045";
   const whatsappUrl = `https://wa.me/${whatsappNumber}`;
+  const instagramUrl = "https://www.instagram.com/itajaimetalprecision/";
+  const facebookUrl = "https://www.facebook.com/itajaimetalprecision/";
 
   return (
     <div className="min-h-screen flex flex-col scroll-smooth">
@@ -19,7 +21,7 @@ const App: React.FC = () => {
         {/* Hero Background with Sparks Animation Effect */}
         <div className="absolute inset-0 bg-slate-950">
           <img 
-            src="https://images.unsplash.com/photo-1504328345606-18bbc8c9d7d1?auto=format&fit=crop&q=80&w=2070" 
+            src="https://images.unsplash.com/photo-1517245386807-bb43f82c33c4?auto=format&fit=crop&q=80&w=2070" 
             className="w-full h-full object-cover opacity-30 scale-105"
             alt="Oficina Metalurgia"
           />
@@ -30,13 +32,13 @@ const App: React.FC = () => {
           <div className="max-w-3xl">
             <div className="inline-flex items-center gap-2 px-3 py-1 rounded-full bg-blue-600/20 border border-blue-500/30 text-blue-400 text-sm font-bold mb-6">
               <HardHat className="w-4 h-4" />
-              ITAJAÍ METAL PRECISION - ESPECIALIZADA
+              ITAJAÍ METAL PRECISION - USINAGEM & ESTRUTURAS
             </div>
             <h1 className="text-4xl md:text-6xl font-industrial text-white font-black leading-tight mb-6 uppercase">
-              Usinagem e Solda <span className="text-transparent bg-clip-text bg-gradient-to-r from-blue-500 to-indigo-400">Alto Padrão</span> em Itajaí
+              De Peças de Torno a <span className="text-transparent bg-clip-text bg-gradient-to-r from-blue-500 to-indigo-400">Carretinhas e Móveis</span>
             </h1>
             <p className="text-xl text-slate-300 mb-10 leading-relaxed max-w-2xl">
-              Fabricação técnica de <strong>roscas trapezoidais</strong>, porcas e buchas de <strong>bronze e nylon</strong>. Soldagem especializada em <strong>aço, alumínio e aço inox</strong>.
+              Referência em Itajaí para <strong>usinagem técnica</strong>, soldagem de alta performance e confecção de <strong>estruturas metálicas personalizadas</strong>.
             </p>
             <div className="flex flex-col sm:flex-row gap-4">
               <a href={whatsappUrl} target="_blank" rel="noopener noreferrer" className="bg-green-600 hover:bg-green-700 text-white px-8 py-4 rounded-xl font-bold text-lg text-center transition-all shadow-lg shadow-green-600/20 flex items-center justify-center gap-2">
@@ -53,8 +55,8 @@ const App: React.FC = () => {
         {/* Floating Stats */}
         <div className="absolute bottom-12 right-12 hidden lg:flex gap-12 bg-slate-900/50 backdrop-blur-md p-8 rounded-2xl border border-slate-800">
           <div>
-            <div className="text-3xl font-industrial font-bold text-blue-500">Bronze</div>
-            <div className="text-xs text-slate-500 uppercase tracking-widest font-bold">Usinagem de Buchas</div>
+            <div className="text-3xl font-industrial font-bold text-blue-500">Móveis</div>
+            <div className="text-xs text-slate-500 uppercase tracking-widest font-bold">Estilo Industrial</div>
           </div>
           <div className="w-px h-12 bg-slate-800"></div>
           <div>
@@ -63,8 +65,8 @@ const App: React.FC = () => {
           </div>
           <div className="w-px h-12 bg-slate-800"></div>
           <div>
-            <div className="text-3xl font-industrial font-bold text-blue-500">Nylon</div>
-            <div className="text-xs text-slate-500 uppercase tracking-widest font-bold">Peças Técnicas</div>
+            <div className="text-3xl font-industrial font-bold text-blue-500">Carretas</div>
+            <div className="text-xs text-slate-500 uppercase tracking-widest font-bold">Produção e Reforma</div>
           </div>
         </div>
       </section>
@@ -80,33 +82,33 @@ const App: React.FC = () => {
         <div className="max-w-7xl mx-auto px-4 grid grid-cols-1 md:grid-cols-2 gap-16 items-center">
           <div>
             <h2 className="text-blue-500 font-bold tracking-widest uppercase mb-4 text-sm">Nossos Diferenciais</h2>
-            <h3 className="text-4xl font-industrial text-white mb-8">Tecnologia e Experiência em Itajaí</h3>
+            <h3 className="text-4xl font-industrial text-white mb-8">Soluções Metalúrgicas Criativas</h3>
             <div className="space-y-8">
               <div className="flex gap-4">
                 <div className="flex-shrink-0 w-12 h-12 bg-blue-500/10 rounded-lg flex items-center justify-center">
-                  <Cog className="text-blue-500 w-6 h-6" />
+                  <Sofa className="text-blue-500 w-6 h-6" />
                 </div>
                 <div>
-                  <h4 className="text-lg font-bold text-white mb-1">Peças Sob Medida</h4>
-                  <p className="text-slate-400">Fabricação precisa de eixos, porcas especiais e buchas em materiais diversos como bronze e nylon industrial.</p>
+                  <h4 className="text-lg font-bold text-white mb-1">Móveis Sob Medida</h4>
+                  <p className="text-slate-400">Criamos bases de mesas, estantes e mobiliário corporativo com acabamento impecável em metal.</p>
                 </div>
               </div>
               <div className="flex gap-4">
                 <div className="flex-shrink-0 w-12 h-12 bg-orange-500/10 rounded-lg flex items-center justify-center">
-                  <Hammer className="text-orange-500 w-6 h-6" />
+                  <Truck className="text-orange-500 w-6 h-6" />
                 </div>
                 <div>
-                  <h4 className="text-lg font-bold text-white mb-1">Solda em Metais Nobres</h4>
-                  <p className="text-slate-400">Domínio em soldagem TIG/MIG para alumínio e aço inox, garantindo resistência e acabamento superior.</p>
+                  <h4 className="text-lg font-bold text-white mb-1">Carretinhas e Logística</h4>
+                  <p className="text-slate-400">Fabricação e manutenção de reboques, garantindo alinhamento e resistência para o seu transporte.</p>
                 </div>
               </div>
               <div className="flex gap-4">
                 <div className="flex-shrink-0 w-12 h-12 bg-green-500/10 rounded-lg flex items-center justify-center">
-                  <Clock className="text-green-500 w-6 h-6" />
+                  <Cog className="text-green-500 w-6 h-6" />
                 </div>
                 <div>
-                  <h4 className="text-lg font-bold text-white mb-1">Agilidade em Itajaí</h4>
-                  <p className="text-slate-400">Localizados na Volta de Cima, oferecemos o melhor tempo de resposta para reparos urgentes na região.</p>
+                  <h4 className="text-lg font-bold text-white mb-1">Usinagem e Torno</h4>
+                  <p className="text-slate-400">Nossa base técnica de precisão continua forte para atender peças mecânicas complexas.</p>
                 </div>
               </div>
             </div>
@@ -114,13 +116,13 @@ const App: React.FC = () => {
           <div className="relative">
             <div className="aspect-square rounded-3xl overflow-hidden border-8 border-slate-800 shadow-2xl">
               <img 
-                src="https://images.unsplash.com/photo-1530124560676-5f7bc47474ff?auto=format&fit=crop&q=80&w=2070" 
+                src="https://images.unsplash.com/photo-1504917595217-d4dc5ebe6122?auto=format&fit=crop&q=80&w=2070" 
                 className="w-full h-full object-cover"
-                alt="Detalhe de Usinagem"
+                alt="Detalhe de Fabricação"
               />
             </div>
             <div className="absolute -bottom-6 -left-6 bg-blue-600 p-6 rounded-2xl text-white max-w-[200px] shadow-xl">
-              <p className="font-bold text-lg">Valmar Silva: Especialista Itajaí Metal Precision</p>
+              <p className="font-bold text-lg">Inovação e Tradição na Volta de Cima</p>
             </div>
           </div>
         </div>
@@ -138,21 +140,46 @@ const App: React.FC = () => {
                 <span className="font-industrial text-lg text-white">ITAJAÍ METAL PRECISION</span>
               </div>
               <p className="text-slate-500 leading-relaxed mb-6">
-                Referência em usinagem de eixos, porcas e buchas (bronze/nylon) e soldagem técnica em Itajaí/SC.
+                Referência em usinagem, soldagem técnica, carretinhas e móveis industriais em Itajaí/SC.
               </p>
               <div className="flex gap-4">
-                <a href={whatsappUrl} target="_blank" rel="noopener noreferrer" className="p-2 bg-slate-900 rounded-lg text-slate-400 hover:text-green-500 transition-colors"><MessageCircle className="w-5 h-5" /></a>
-                <a href="#" className="p-2 bg-slate-900 rounded-lg text-slate-400 hover:text-blue-500 transition-colors"><Instagram className="w-5 h-5" /></a>
+                <a 
+                  href={whatsappUrl} 
+                  target="_blank" 
+                  rel="noopener noreferrer" 
+                  className="p-3 bg-slate-900 rounded-xl text-slate-400 hover:text-green-500 hover:bg-slate-800 transition-all border border-slate-800 hover:border-green-500/50"
+                  title="WhatsApp"
+                >
+                  <MessageCircle className="w-6 h-6" />
+                </a>
+                <a 
+                  href={instagramUrl} 
+                  target="_blank" 
+                  rel="noopener noreferrer" 
+                  className="p-3 bg-slate-900 rounded-xl text-slate-400 hover:text-pink-500 hover:bg-slate-800 transition-all border border-slate-800 hover:border-pink-500/50"
+                  title="Instagram"
+                >
+                  <Instagram className="w-6 h-6" />
+                </a>
+                <a 
+                  href={facebookUrl} 
+                  target="_blank" 
+                  rel="noopener noreferrer" 
+                  className="p-3 bg-slate-900 rounded-xl text-slate-400 hover:text-blue-500 hover:bg-slate-800 transition-all border border-slate-800 hover:border-blue-500/50"
+                  title="Facebook"
+                >
+                  <Facebook className="w-6 h-6" />
+                </a>
               </div>
             </div>
             
             <div>
               <h4 className="text-white font-bold mb-6 uppercase tracking-widest text-sm">Especialidades</h4>
               <ul className="space-y-4 text-slate-500">
-                <li><a href="#servicos" className="hover:text-blue-500">Usinagem de Eixos</a></li>
-                <li><a href="#servicos" className="hover:text-blue-500">Buchas Bronze/Nylon</a></li>
-                <li><a href="#servicos" className="hover:text-blue-500">Solda Alumínio e Inox</a></li>
-                <li><a href="#servicos" className="hover:text-blue-500">Porcas Sob Medida</a></li>
+                <li><a href="#servicos" className="hover:text-blue-500 transition-colors">Carretinhas Reboque</a></li>
+                <li><a href="#servicos" className="hover:text-blue-500 transition-colors">Móveis Industriais</a></li>
+                <li><a href="#servicos" className="hover:text-blue-500 transition-colors">Usinagem de Eixos</a></li>
+                <li><a href="#servicos" className="hover:text-blue-500 transition-colors">Solda Alumínio e Inox</a></li>
               </ul>
             </div>
 
