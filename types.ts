@@ -26,3 +26,14 @@ export interface QuoteHistoryItem extends AIResponse {
   originalDescription: string;
   timestamp: number;
 }
+
+export interface Lead {
+  id: string;
+  name: string;
+  contact: string;
+  email?: string;
+  interest: 'Torno' | 'Solda MIG/TIG' | 'Móveis Industriais' | 'Carretinhas' | 'Protótipos 3D' | 'Outro';
+  message: string;
+  status: 'Pendente' | 'Em Atendimento' | 'Concluído';
+  createdAt: number;
+}

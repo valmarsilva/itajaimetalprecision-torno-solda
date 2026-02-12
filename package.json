@@ -1,23 +1,19 @@
+
 {
-  "name": "itajaí-metal-precision---serviços-de-torno-e-soldagem",
-  "private": true,
-  "version": "0.0.0",
+  "name": "itajai-metal-precision",
+  "version": "1.0.0",
+  "description": "Site de Usinagem e Soldagem com Backend Node.js",
+  "main": "server.js",
   "type": "module",
   "scripts": {
-    "dev": "vite",
-    "build": "vite build",
-    "preview": "vite preview"
+    "start": "node server.js",
+    "build": "mkdir -p dist && cp index.html index.tsx types.ts healthCheck.ts dist/ && cp -r components services dist/"
   },
   "dependencies": {
+    "express": "^4.18.2",
+    "cors": "^2.8.5",
+    "body-parser": "^1.20.2",
     "@google/genai": "^1.40.0",
-    "react": "^19.2.4",
-    "react-dom": "^19.2.4",
     "lucide-react": "^0.563.0"
-  },
-  "devDependencies": {
-    "@types/node": "^22.14.0",
-    "@vitejs/plugin-react": "^5.0.0",
-    "typescript": "~5.8.2",
-    "vite": "^6.2.0"
   }
 }

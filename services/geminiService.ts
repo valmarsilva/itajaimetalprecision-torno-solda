@@ -8,14 +8,16 @@ export const analyzeProject = async (description: string): Promise<AIResponse> =
   try {
     const response = await ai.models.generateContent({
       model: 'gemini-3-flash-preview',
-      contents: `Você é um consultor técnico da Itajaí Metal Precision. 
+      contents: `Você é um consultor técnico sênior da Itajaí Metal Precision. 
       Analise o seguinte projeto: "${description}". 
       Nossa empresa faz: 
-      1. Torno/Usinagem (eixos, buchas, roscas)
-      2. Solda MIG/TIG (Inox, Alumínio, Aço)
-      3. Móveis Industriais sob medida
-      4. Carretinhas/Reboques (fabricação e reparo)
+      1. Torno/Usinagem (eixos, buchas, roscas, peças de precisão)
+      2. Solda MIG/TIG (Inox, Alumínio, Aço, recuperação de blocos)
+      3. Móveis Industriais (estilo loft, bases de mesas, prateleiras)
+      4. Carretinhas/Reboques (reforma estrutural e fabricação)
+      5. Protótipos 3D (Impressão 3D funcional, modelagem CAD, validação de peças antes da usinagem)
 
+      Se o cliente descrever uma peça complexa que ainda não existe, sugira começar pelo Protótipo 3D para validar encaixes.
       Determine qual categoria se encaixa melhor e sugira o processo técnico ideal.
       Responda em formato JSON.`,
       config: {
@@ -41,8 +43,8 @@ export const analyzeProject = async (description: string): Promise<AIResponse> =
   } catch (error) {
     console.error("Erro na análise da IA:", error);
     return {
-      analysis: "Não foi possível analisar detalhadamente no momento, mas nossa equipe de especialistas em carretinhas e móveis revisará sua mensagem em breve.",
-      suggestedProcess: "Análise Manual Pendente",
+      analysis: "Não foi possível analisar detalhadamente no momento. Nossa equipe técnica revisará seu projeto, incluindo a viabilidade de prototipagem 3D ou usinagem direta.",
+      suggestedProcess: "Análise Técnica Pendente",
       complexity: "Média"
     };
   }

@@ -1,6 +1,6 @@
 
 import React from 'react';
-import { Settings, Zap, Flame, Target, Truck, Sofa } from 'lucide-react';
+import { Settings, Zap, Flame, Target, Truck, Sofa, Box, Layers } from 'lucide-react';
 
 const services = [
   {
@@ -9,6 +9,13 @@ const services = [
     icon: <Settings className="w-8 h-8 text-blue-500" />,
     description: 'Fabricação técnica de eixos, porcas e peças cilíndricas com tolerâncias rigorosas.',
     features: ['Eixos Industriais', 'Porcas Especiais', 'Torno Mecânico']
+  },
+  {
+    id: 'prototipos-3d',
+    title: 'Protótipos e Impressão 3D',
+    icon: <Layers className="w-8 h-8 text-indigo-500" />,
+    description: 'Desenvolvimento de protótipos funcionais em 3D para validação de projetos e engenharia.',
+    features: ['Modelagem CAD', 'Impressão FDM/Resina', 'Peças de Reposição']
   },
   {
     id: 'carretinhas',
@@ -39,22 +46,22 @@ const ServiceSection: React.FC = () => {
       <div className="max-w-7xl mx-auto px-4">
         <div className="text-center mb-16">
           <h2 className="text-blue-500 font-bold tracking-widest uppercase mb-4">Nossa Expertise</h2>
-          <h3 className="text-4xl md:text-5xl font-industrial text-white uppercase">Soluções Completas em Metal</h3>
+          <h3 className="text-4xl md:text-5xl font-industrial text-white uppercase">Soluções de Engenharia e Metal</h3>
         </div>
         
-        <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-8">
+        <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 xl:grid-cols-5 gap-6">
           {services.map((service) => (
-            <div key={service.id} className="group bg-slate-800/50 border border-slate-700 p-8 rounded-2xl hover:border-blue-500 transition-all duration-300 hover:shadow-2xl hover:shadow-blue-500/10">
+            <div key={service.id} className="group bg-slate-800/50 border border-slate-700 p-8 rounded-2xl hover:border-blue-500 transition-all duration-300 hover:shadow-2xl hover:shadow-blue-500/10 flex flex-col">
               <div className="mb-6 bg-slate-900 w-16 h-16 rounded-xl flex items-center justify-center group-hover:scale-110 transition-transform">
                 {service.icon}
               </div>
               <h4 className="text-xl font-bold text-white mb-3">{service.title}</h4>
-              <p className="text-slate-400 mb-6 leading-relaxed h-20">
+              <p className="text-slate-400 mb-6 leading-relaxed flex-grow text-sm">
                 {service.description}
               </p>
               <ul className="space-y-2">
                 {service.features.map((feat, idx) => (
-                  <li key={idx} className="flex items-center text-sm text-slate-300">
+                  <li key={idx} className="flex items-center text-[13px] text-slate-300">
                     <span className="w-1.5 h-1.5 bg-blue-500 rounded-full mr-2"></span>
                     {feat}
                   </li>
