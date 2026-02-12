@@ -15,10 +15,12 @@ const Navbar: React.FC = () => {
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
         <div className="flex justify-between items-center h-20">
           <div className="flex items-center gap-2">
-            <div className="w-10 h-10 bg-blue-600 rounded-lg flex items-center justify-center font-industrial text-white font-bold text-xl">
-              MP
+            <div className="w-12 h-10 bg-blue-600 rounded-lg flex items-center justify-center font-industrial text-white font-bold text-lg">
+              IMP
             </div>
-            <span className="font-industrial text-xl tracking-tighter text-white">METAL<span className="text-blue-500 underline decoration-2 underline-offset-4">PRECISION</span></span>
+            <span className="font-industrial text-xl tracking-tighter text-white">
+              <span className="text-blue-500">ITAJAÍ</span> METAL<span className="text-blue-500 underline decoration-2 underline-offset-4">PRECISION</span>
+            </span>
           </div>
           <div className="hidden md:flex items-center space-x-8">
             <a href="#home" onClick={(e) => handleScroll(e, '#home')} className="text-slate-300 hover:text-blue-500 transition-colors font-medium">Início</a>

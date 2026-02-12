@@ -30,13 +30,13 @@ const App: React.FC = () => {
           <div className="max-w-3xl">
             <div className="inline-flex items-center gap-2 px-3 py-1 rounded-full bg-blue-600/20 border border-blue-500/30 text-blue-400 text-sm font-bold mb-6">
               <HardHat className="w-4 h-4" />
-              OFICINA ESPECIALIZADA EM ITAJAÍ
+              ITAJAÍ METAL PRECISION - ESPECIALIZADA
             </div>
             <h1 className="text-4xl md:text-6xl font-industrial text-white font-black leading-tight mb-6 uppercase">
-              Usinagem de Peças, <span className="text-transparent bg-clip-text bg-gradient-to-r from-blue-500 to-indigo-400">Eixos, Porcas e Buchas</span>
+              Usinagem e Solda <span className="text-transparent bg-clip-text bg-gradient-to-r from-blue-500 to-indigo-400">Alto Padrão</span> em Itajaí
             </h1>
             <p className="text-xl text-slate-300 mb-10 leading-relaxed max-w-2xl">
-              Fabricação de <strong>roscas trapezoidais</strong>, porcas e buchas de <strong>bronze e nylon</strong>. Soldagem em <strong>aço, alumínio e aço inox</strong>.
+              Fabricação técnica de <strong>roscas trapezoidais</strong>, porcas e buchas de <strong>bronze e nylon</strong>. Soldagem especializada em <strong>aço, alumínio e aço inox</strong>.
             </p>
             <div className="flex flex-col sm:flex-row gap-4">
               <a href={whatsappUrl} target="_blank" rel="noopener noreferrer" className="bg-green-600 hover:bg-green-700 text-white px-8 py-4 rounded-xl font-bold text-lg text-center transition-all shadow-lg shadow-green-600/20 flex items-center justify-center gap-2">
@@ -80,7 +80,7 @@ const App: React.FC = () => {
         <div className="max-w-7xl mx-auto px-4 grid grid-cols-1 md:grid-cols-2 gap-16 items-center">
           <div>
             <h2 className="text-blue-500 font-bold tracking-widest uppercase mb-4 text-sm">Nossos Diferenciais</h2>
-            <h3 className="text-4xl font-industrial text-white mb-8">Usinagem e Solda com Rigor Técnico</h3>
+            <h3 className="text-4xl font-industrial text-white mb-8">Tecnologia e Experiência em Itajaí</h3>
             <div className="space-y-8">
               <div className="flex gap-4">
                 <div className="flex-shrink-0 w-12 h-12 bg-blue-500/10 rounded-lg flex items-center justify-center">
@@ -120,7 +120,7 @@ const App: React.FC = () => {
               />
             </div>
             <div className="absolute -bottom-6 -left-6 bg-blue-600 p-6 rounded-2xl text-white max-w-[200px] shadow-xl">
-              <p className="font-bold text-lg">Valmar Silva: Especialista em Torno e Solda</p>
+              <p className="font-bold text-lg">Valmar Silva: Especialista Itajaí Metal Precision</p>
             </div>
           </div>
         </div>
@@ -132,13 +132,13 @@ const App: React.FC = () => {
           <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-12 mb-16">
             <div className="col-span-1 lg:col-span-1">
               <div className="flex items-center gap-2 mb-6">
-                <div className="w-8 h-8 bg-blue-600 rounded flex items-center justify-center font-industrial text-white font-bold text-sm">
-                  MP
+                <div className="w-10 h-10 bg-blue-600 rounded flex items-center justify-center font-industrial text-white font-bold text-sm">
+                  IMP
                 </div>
-                <span className="font-industrial text-lg text-white">METALPRECISION</span>
+                <span className="font-industrial text-lg text-white">ITAJAÍ METAL PRECISION</span>
               </div>
               <p className="text-slate-500 leading-relaxed mb-6">
-                Usinagem de eixos, porcas e buchas (bronze/nylon) e soldagem de aço, alumínio e inox em Itajaí/SC.
+                Referência em usinagem de eixos, porcas e buchas (bronze/nylon) e soldagem técnica em Itajaí/SC.
               </p>
               <div className="flex gap-4">
                 <a href={whatsappUrl} target="_blank" rel="noopener noreferrer" className="p-2 bg-slate-900 rounded-lg text-slate-400 hover:text-green-500 transition-colors"><MessageCircle className="w-5 h-5" /></a>
@@ -197,7 +197,7 @@ const App: React.FC = () => {
           </div>
           
           <div className="pt-12 border-t border-slate-900 text-center text-slate-600 text-sm">
-            &copy; {new Date().getFullYear()} MetalPrecision Usinagem e Solda - Valmar Silva. Itajaí/SC.
+            &copy; {new Date().getFullYear()} Itajaí Metal Precision - Valmar Silva. Itajaí/SC.
           </div>
         </div>
       </footer>
