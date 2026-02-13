@@ -2,6 +2,7 @@
 import express from 'express';
 import cors from 'cors';
 import bodyParser from 'body-parser';
+import compression from 'compression';
 import fs from 'fs/promises';
 import path from 'path';
 import { fileURLToPath } from 'url';
@@ -13,6 +14,8 @@ const app = express();
 const PORT = process.env.PORT || 3000;
 const LEADS_FILE = path.join(__dirname, 'leads.json');
 
+// Middlewares essenciais
+app.use(compression()); // Compacta os arquivos para carregar mais rápido
 app.use(cors());
 app.use(bodyParser.json());
 
@@ -31,10 +34,8 @@ app.post('/api/leads', async (req, res) => {
     const newLead = req.body;
     const data = await fs.readFile(LEADS_FILE, 'utf-8');
     const leads = JSON.parse(data);
-    
-    leads.unshift(newLead); // Adiciona no início
+    leads.unshift(newLead);
     await fs.writeFile(LEADS_FILE, JSON.stringify(leads, null, 2));
-    
     res.status(201).json({ success: true, lead: newLead });
   } catch (error) {
     res.status(500).json({ error: 'Erro ao salvar lead' });
@@ -51,17 +52,23 @@ app.get('/api/leads', async (req, res) => {
   }
 });
 
-// Servir arquivos estáticos (Frontend)
-// Em produção na Hostinger, serviremos a pasta 'dist' ou a raiz
+// Servir arquivos estáticos da pasta 'dist' (gerada pelo build)
+// Se a pasta 'dist' não existir, serve a raiz (fallback para dev)
+const distPath = path.join(__dirname, 'dist');
+app.use(express.static(distPath));
 app.use(express.static(__dirname));
 
-// Fallback para SPA (qualquer rota não API volta pro index.html)
+// Fallback para SPA
 app.get('*', (req, res) => {
   if (req.path.startsWith('/api')) return;
-  res.sendFile(path.join(__dirname, 'index.html'));
+  // Tenta enviar o index da dist primeiro
+  const indexPath = path.join(distPath, 'index.html');
+  res.sendFile(indexPath, (err) => {
+    if (err) res.sendFile(path.join(__dirname, 'index.html'));
+  });
 });
 
 app.listen(PORT, () => {
-  console.log(`Servidor rodando na porta ${PORT}`);
+  console.log(`🚀 Servidor otimizado rodando na porta ${PORT}`);
   initLeadsFile();
 });

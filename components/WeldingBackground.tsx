@@ -19,11 +19,11 @@ const WeldingBackground: React.FC = () => {
     // Configuração do Eixo Único e da Porca
     const axis = { 
       y: 0.75, 
-      speed: 0.25, // Rotação visual do fuso
+      speed: 0.2, // Rotação do fuso
       offset: 0,
-      nutX: Math.random() * window.innerWidth, // Posição inicial aleatória
+      nutX: Math.random() * window.innerWidth,
       nutDir: 1,
-      nutSpeed: 0.6 // Velocidade ligeiramente reduzida para elegância
+      nutSpeed: 0.5 // Velocidade de precisão
     };
 
     const resize = () => {
@@ -49,11 +49,11 @@ const WeldingBackground: React.FC = () => {
       constructor(x: number, y: number) {
         this.x = x;
         this.y = y;
-        this.vx = (Math.random() - 1.1) * 8; 
-        this.vy = (Math.random() - 0.5) * 12;
-        this.maxLife = Math.random() * 60 + 20;
+        this.vx = (Math.random() - 1.2) * 10; 
+        this.vy = (Math.random() - 0.5) * 15;
+        this.maxLife = Math.random() * 50 + 20;
         this.life = this.maxLife;
-        this.size = Math.random() * 2.5 + 0.5;
+        this.size = Math.random() * 3 + 0.5;
         
         const colors = ['#ff9d00', '#ff5e00', '#fff000', '#ffffff', '#00e5ff'];
         this.color = colors[Math.floor(Math.random() * colors.length)];
@@ -62,9 +62,9 @@ const WeldingBackground: React.FC = () => {
       update() {
         this.x += this.vx;
         this.y += this.vy;
-        this.vy += 0.2;
+        this.vy += 0.25;
         this.life--;
-        this.size *= 0.98; 
+        this.size *= 0.97; 
       }
 
       draw(ctx: CanvasRenderingContext2D) {
@@ -73,38 +73,38 @@ const WeldingBackground: React.FC = () => {
         
         ctx.beginPath();
         ctx.moveTo(this.x, this.y);
-        ctx.lineTo(this.x - this.vx * 2, this.y - this.vy * 2);
+        ctx.lineTo(this.x - this.vx * 1.5, this.y - this.vy * 1.5);
         ctx.lineWidth = this.size;
         ctx.lineCap = 'round';
         ctx.strokeStyle = this.color;
         ctx.stroke();
         
-        ctx.shadowBlur = 8;
+        ctx.shadowBlur = 10;
         ctx.shadowColor = this.color;
       }
     }
 
     const drawStainlessAxis = (ctx: CanvasRenderingContext2D, yPos: number, xOffset: number) => {
-      const axisHeight = 24; // Ligeiramente maior para acompanhar a porca
-      const threadSpacing = 18;
-      const threadAngle = 0.4;
+      const axisHeight = 28; 
+      const threadSpacing = 20;
+      const threadAngle = 0.45;
       
       ctx.save();
-      ctx.globalAlpha = 0.75;
+      ctx.globalAlpha = 0.8;
       
-      // Efeito Inox (Aço Inoxidável Polido de Alto Contraste)
+      // Aço Inox Polido
       const inoxGrad = ctx.createLinearGradient(0, yPos - axisHeight/2, 0, yPos + axisHeight/2);
       inoxGrad.addColorStop(0, '#0f172a');   
-      inoxGrad.addColorStop(0.15, '#334155'); 
-      inoxGrad.addColorStop(0.4, '#ffffff'); // Brilho intenso no topo
-      inoxGrad.addColorStop(0.5, '#f8fafc'); 
-      inoxGrad.addColorStop(0.85, '#334155');
+      inoxGrad.addColorStop(0.2, '#475569'); 
+      inoxGrad.addColorStop(0.45, '#ffffff'); // Brilho de metal limpo
+      inoxGrad.addColorStop(0.55, '#e2e8f0'); 
+      inoxGrad.addColorStop(0.8, '#475569');
       inoxGrad.addColorStop(1, '#020617');   
       
       ctx.fillStyle = inoxGrad;
       ctx.fillRect(0, yPos - axisHeight/2, width, axisHeight);
 
-      // Roscas do Fuso com maior definição
+      // Roscas
       ctx.strokeStyle = 'rgba(255, 255, 255, 0.4)';
       ctx.lineWidth = 5;
       ctx.beginPath();
@@ -118,60 +118,44 @@ const WeldingBackground: React.FC = () => {
     };
 
     const drawBronzeNut = (ctx: CanvasRenderingContext2D, x: number, y: number) => {
-      const size = 72; // Tamanho substancialmente aumentado para impacto visual
+      const size = 72; // TAMANHO AUMENTADO PARA VISIBILIDADE MÁXIMA
       ctx.save();
       
-      // Glow exterior dourado intenso
-      ctx.shadowBlur = 40;
-      ctx.shadowColor = 'rgba(251, 191, 36, 0.7)';
+      // Brilho exterior (Glow) para destacar a porca do fundo
+      ctx.shadowBlur = 35;
+      ctx.shadowColor = 'rgba(217, 119, 6, 0.6)';
 
-      // Bronze Quadrado - Gradiente de Luxo e Alta Precisão
+      // Bronze de Alta Visibilidade (Gradiente Metálico Intenso)
       const bronzeGrad = ctx.createLinearGradient(x - size/2, y - size/2, x + size/2, y + size/2);
-      bronzeGrad.addColorStop(0, '#451a03'); // Sombra Profunda
-      bronzeGrad.addColorStop(0.1, '#78350f'); 
-      bronzeGrad.addColorStop(0.4, '#fde047'); // Centro Vibrante
-      bronzeGrad.addColorStop(0.5, '#ffffff'); // Reflexo Especular Puro
-      bronzeGrad.addColorStop(0.6, '#fde047'); 
-      bronzeGrad.addColorStop(0.9, '#b45309'); 
+      bronzeGrad.addColorStop(0, '#451a03'); // Bronze Escuro
+      bronzeGrad.addColorStop(0.2, '#b45309'); 
+      bronzeGrad.addColorStop(0.48, '#fde047'); // Brilho Central (Ouro/Bronze)
+      bronzeGrad.addColorStop(0.52, '#ffffff'); // Reflexo de Luz Intenso no centro
+      bronzeGrad.addColorStop(0.8, '#d97706'); 
       bronzeGrad.addColorStop(1, '#451a03');
 
       ctx.fillStyle = bronzeGrad;
       
-      // Corpo da Porca Quadrada
+      // Corpo Quadrado da Porca
       ctx.fillRect(x - size/2, y - size/2, size, size);
       
-      // Chanfros duplos para estética de engenharia premium
+      // Bordas Chanfradas (Contorno de brilho)
       ctx.shadowBlur = 0; 
-      
-      // Contorno de Brilho Externo
-      ctx.strokeStyle = 'rgba(255, 255, 255, 0.8)';
-      ctx.lineWidth = 2;
+      ctx.strokeStyle = 'rgba(255, 255, 255, 0.7)';
+      ctx.lineWidth = 2.5;
       ctx.strokeRect(x - size/2, y - size/2, size, size);
 
-      // Contorno Interno de Profundidade
-      ctx.strokeStyle = 'rgba(69, 26, 3, 0.5)';
-      ctx.lineWidth = 4;
-      ctx.strokeRect(x - size/2 + 3, y - size/2 + 3, size - 6, size - 6);
-
-      // Furo central de precisão
+      // Furo central (Vazio para o fuso passar)
       ctx.fillStyle = '#020617';
       ctx.beginPath();
-      ctx.arc(x, y, 18, 0, Math.PI * 2);
+      ctx.arc(x, y, 20, 0, Math.PI * 2);
       ctx.fill();
       
-      // Brilho da rosca interna
-      ctx.strokeStyle = 'rgba(251, 191, 36, 0.9)';
+      // Rosca interna da porca
+      ctx.strokeStyle = '#f59e0b';
       ctx.lineWidth = 3;
       ctx.beginPath();
-      ctx.arc(x, y, 18, 0, Math.PI * 2);
-      ctx.stroke();
-
-      // Cruz de centragem (opcional, para look técnico)
-      ctx.strokeStyle = 'rgba(255, 255, 255, 0.1)';
-      ctx.lineWidth = 1;
-      ctx.beginPath();
-      ctx.moveTo(x - size/2, y); ctx.lineTo(x + size/2, y);
-      ctx.moveTo(x, y - size/2); ctx.lineTo(x, y + size/2);
+      ctx.arc(x, y, 20, 0, Math.PI * 2);
       ctx.stroke();
 
       ctx.restore();
@@ -183,65 +167,47 @@ const WeldingBackground: React.FC = () => {
     const animate = () => {
       ctx.clearRect(0, 0, width, height);
 
-      // 1. Desenhar Fuso de Inox
+      // 1. Fuso
       axis.offset += axis.speed;
       drawStainlessAxis(ctx, height * axis.y, axis.offset);
 
-      // 2. Desenhar Porca de Bronze (Movimento Loop)
+      // 2. Porca de Bronze (Movimento Infinito)
       axis.nutX += axis.nutSpeed * axis.nutDir;
-      
-      // Limites do loop ajustados para o novo tamanho
-      if (axis.nutX > width + 50) {
-        axis.nutDir = -1;
-      } else if (axis.nutX < -50) {
-        axis.nutDir = 1;
-      }
+      if (axis.nutX > width + 100) axis.nutDir = -1;
+      else if (axis.nutX < -100) axis.nutDir = 1;
       
       drawBronzeNut(ctx, axis.nutX, height * axis.y);
 
-      // 3. Efeitos de Soldagem
-      if (flashTimer <= 0 && Math.random() > 0.97) {
-        flashIntensity = Math.random() * 0.7;
-        flashTimer = Math.random() * 20 + 5;
-        
-        const spawnX = width * (0.6 + Math.random() * 0.4); 
-        const spawnY = height * (0.15 + Math.random() * 0.4);
-        
-        for(let i = 0; i < 35; i++) {
-          particles.push(new Particle(spawnX, spawnY));
-        }
+      // 3. Efeito de Solda
+      if (flashTimer <= 0 && Math.random() > 0.98) {
+        flashIntensity = Math.random() * 0.8;
+        flashTimer = Math.random() * 15 + 5;
+        const spawnX = width * (0.6 + Math.random() * 0.3); 
+        const spawnY = height * (0.2 + Math.random() * 0.3);
+        for(let i = 0; i < 40; i++) particles.push(new Particle(spawnX, spawnY));
       }
 
       if (flashIntensity > 0) {
-        const blueFlash = ctx.createRadialGradient(
-          width * 0.8, height * 0.4, 0,
-          width * 0.8, height * 0.4, width * 0.5
-        );
+        const blueFlash = ctx.createRadialGradient(width * 0.8, height * 0.4, 0, width * 0.8, height * 0.4, width * 0.6);
         blueFlash.addColorStop(0, `rgba(14, 165, 233, ${flashIntensity})`);
         blueFlash.addColorStop(1, 'rgba(0, 0, 0, 0)');
-        
         ctx.fillStyle = blueFlash;
         ctx.globalAlpha = 1.0;
         ctx.fillRect(0, 0, width, height);
-        
-        flashIntensity *= 0.94;
+        flashIntensity *= 0.93;
         flashTimer--;
       }
 
       // 4. Faíscas
       if (Math.random() > 0.4) {
-        const spawnX = width * (0.6 + Math.random() * 0.4);
-        const spawnY = Math.random() * height * 0.4; 
-        particles.push(new Particle(spawnX, spawnY));
+        particles.push(new Particle(width * (0.7 + Math.random() * 0.3), Math.random() * height * 0.4));
       }
 
       for (let i = particles.length - 1; i >= 0; i--) {
         const p = particles[i];
         p.update();
         p.draw(ctx);
-        if (p.life <= 0 || p.y > height || p.x < 0) {
-          particles.splice(i, 1);
-        }
+        if (p.life <= 0 || p.y > height) particles.splice(i, 1);
       }
 
       animationFrameId = requestAnimationFrame(animate);

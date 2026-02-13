@@ -1,13 +1,15 @@
 
-import React from 'react';
+import React, { lazy, Suspense } from 'react';
 import Navbar from './components/Navbar';
 import ServiceSection from './components/ServiceSection';
 import AIQuoteAssistant from './components/AIQuoteAssistant';
 import ContactForm from './components/ContactForm';
-import LeadDashboard from './components/LeadDashboard';
-import Diagnostics from './components/Diagnostics';
 import WeldingBackground from './components/WeldingBackground';
-import { Layers, MessageCircle, Truck, Cog } from 'lucide-react';
+import { Layers, MessageCircle, Truck, Cog, Loader2 } from 'lucide-react';
+
+// Carregamento Preguiçoso (Lazy Loading) para o que não é essencial no início
+const LeadDashboard = lazy(() => import('./components/LeadDashboard'));
+const Diagnostics = lazy(() => import('./components/Diagnostics'));
 
 const App: React.FC = () => {
   const whatsappNumber = "5547992460045";
@@ -27,11 +29,7 @@ const App: React.FC = () => {
 
       {/* Hero Section */}
       <section id="home" className="relative h-screen flex items-center overflow-hidden bg-slate-950">
-        
-        {/* NOVA ANIMAÇÃO DE SOLDA NO FUNDO */}
         <WeldingBackground />
-
-        {/* Hero Image Overlay */}
         <div className="absolute inset-0 z-0">
           <img 
             src="https://images.unsplash.com/photo-1517245386807-bb43f82c33c4?auto=format&fit=crop&q=80&w=2070" 
@@ -50,11 +48,9 @@ const App: React.FC = () => {
             <h1 className="text-4xl md:text-6xl font-industrial text-white font-black leading-tight mb-2 uppercase drop-shadow-2xl">
               Usinagem, Solda e <span className="text-transparent bg-clip-text bg-gradient-to-r from-blue-400 to-indigo-300">Metalurgia Técnica</span>
             </h1>
-            
             <p className="text-2xl md:text-3xl text-indigo-400 mb-6 font-bold italic tracking-wide uppercase drop-shadow-md">
               PROTOTIPOS EM 3D COM ABS - PETG, PLA
             </p>
-
             <p className="text-xl text-slate-300 mb-10 leading-relaxed max-w-2xl">
               Desenvolvemos seu projeto do zero em Itajaí. Execução metalúrgica com solda técnica, torno mecânico e inovação em manufatura aditiva.
             </p>
@@ -72,31 +68,12 @@ const App: React.FC = () => {
             </div>
           </div>
         </div>
-
-        {/* Floating Stats */}
-        <div className="absolute bottom-12 right-12 hidden lg:flex gap-12 bg-slate-900/50 backdrop-blur-md p-8 rounded-2xl border border-slate-800 z-10">
-          <div>
-            <div className="text-3xl font-industrial font-bold text-blue-500">Impressão</div>
-            <div className="text-xs text-slate-500 uppercase tracking-widest font-bold">Protótipos 3D</div>
-          </div>
-          <div className="w-px h-12 bg-slate-800"></div>
-          <div>
-            <div className="text-3xl font-industrial font-bold text-blue-500">Usinagem</div>
-            <div className="text-xs text-slate-500 uppercase tracking-widest font-bold">Eixos e Peças</div>
-          </div>
-          <div className="w-px h-12 bg-slate-800"></div>
-          <div>
-            <div className="text-3xl font-industrial font-bold text-blue-500">Solda</div>
-            <div className="text-xs text-slate-500 uppercase tracking-widest font-bold">MIG/TIG Especial</div>
-          </div>
-        </div>
       </section>
 
       <ServiceSection />
       <AIQuoteAssistant />
       <ContactForm />
 
-      {/* Diferenciais */}
       <section className="py-24 bg-slate-900">
         <div className="max-w-7xl mx-auto px-4 grid grid-cols-1 md:grid-cols-2 gap-16 items-center">
           <div>
@@ -150,8 +127,11 @@ const App: React.FC = () => {
         </p>
       </footer>
 
-      <LeadDashboard />
-      <Diagnostics />
+      {/* Componentes Administrativos carregados sob demanda */}
+      <Suspense fallback={<div className="fixed bottom-6 left-6 z-[100] bg-slate-800 p-3 rounded-full"><Loader2 className="animate-spin text-white w-6 h-6" /></div>}>
+        <LeadDashboard />
+        <Diagnostics />
+      </Suspense>
       
       <a 
         href={whatsappUrl} 
