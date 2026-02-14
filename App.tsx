@@ -5,7 +5,7 @@ import ServiceSection from './components/ServiceSection';
 import AIQuoteAssistant from './components/AIQuoteAssistant';
 import ContactForm from './components/ContactForm';
 import WeldingBackground from './components/WeldingBackground';
-import { Layers, MessageCircle, Truck, Cog, Loader2, Sparkles } from 'lucide-react';
+import { Layers, MessageCircle, Truck, Cog, Sparkles } from 'lucide-react';
 
 const LeadDashboard = lazy(() => import('./components/LeadDashboard'));
 const Diagnostics = lazy(() => import('./components/Diagnostics'));
@@ -23,66 +23,60 @@ const App: React.FC = () => {
   };
 
   return (
-    <div className="min-h-screen flex flex-col scroll-smooth bg-slate-950">
+    <div className="min-h-screen flex flex-col bg-slate-950">
       <Navbar />
 
-      {/* Hero Section - Agora com mais luz e brilho metálico */}
       <section id="home" className="relative min-h-screen flex items-center overflow-hidden pt-20">
         <WeldingBackground />
         
-        {/* Camada de Brilho Metálico Superior */}
-        <div className="absolute top-0 left-1/2 -translate-x-1/2 w-full h-[500px] bg-blue-600/10 blur-[120px] rounded-full pointer-events-none"></div>
+        {/* Camada de Luminosidade Superior - Azul Vibrante */}
+        <div className="absolute top-0 left-1/2 -translate-x-1/2 w-full h-[600px] bg-blue-500/10 blur-[140px] rounded-full pointer-events-none"></div>
         
         <div className="absolute inset-0 z-0">
           <img 
             src="https://images.unsplash.com/photo-1504917595217-d4dc5ebe6122?auto=format&fit=crop&q=80&w=2070" 
-            className="w-full h-full object-cover opacity-30 mix-blend-overlay"
+            className="w-full h-full object-cover opacity-20 mix-blend-overlay"
             alt="Usinagem Industrial"
           />
-          <div className="absolute inset-0 bg-gradient-to-b from-slate-950/20 via-slate-950/80 to-slate-950"></div>
+          <div className="absolute inset-0 bg-gradient-to-b from-slate-950/40 via-slate-950/80 to-slate-950"></div>
         </div>
 
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 relative z-10 w-full py-20">
           <div className="max-w-3xl">
-            <div className="inline-flex items-center gap-2 px-4 py-1.5 rounded-full bg-blue-500/10 border border-blue-400/30 text-blue-400 text-sm font-bold mb-8 uppercase tracking-widest backdrop-blur-sm animate-pulse">
+            <div className="inline-flex items-center gap-2 px-4 py-1.5 rounded-full bg-blue-500/20 border border-blue-400/40 text-blue-300 text-sm font-bold mb-8 uppercase tracking-widest backdrop-blur-md animate-pulse">
               <Sparkles className="w-4 h-4" />
               Precisão Industrial em Itajaí
             </div>
             
             <h1 className="text-5xl md:text-7xl font-industrial text-white font-black leading-[1.1] mb-6 uppercase">
               Usinagem e <br />
-              <span className="text-transparent bg-clip-text bg-gradient-to-r from-blue-400 via-indigo-300 to-blue-500">Solda Técnica</span>
+              <span className="text-transparent bg-clip-text bg-gradient-to-r from-blue-400 via-white to-blue-500">Solda Técnica</span>
             </h1>
 
             <div className="flex items-center gap-3 mb-8">
               <div className="h-px w-12 bg-blue-500"></div>
-              <p className="text-xl md:text-2xl text-slate-200 font-bold tracking-tight uppercase">
+              <p className="text-xl md:text-2xl text-white font-bold tracking-tight uppercase">
                 Protótipos 3D <span className="text-blue-500 mx-2">|</span> ABS • PETG • PLA
               </p>
             </div>
 
-            <p className="text-lg md:text-xl text-slate-400 mb-12 leading-relaxed max-w-2xl border-l-2 border-slate-800 pl-6">
+            <p className="text-lg md:text-xl text-slate-300 mb-12 leading-relaxed max-w-2xl border-l-2 border-blue-500/50 pl-6">
               Especialistas em componentes de alta precisão, soldagem MIG/TIG de Inox e Alumínio, e desenvolvimento de projetos do protótipo à peça final.
             </p>
 
             <div className="flex flex-col sm:flex-row gap-5">
-              <a href={whatsappUrl} target="_blank" rel="noopener noreferrer" className="group bg-blue-600 hover:bg-blue-500 text-white px-10 py-5 rounded-2xl font-bold text-lg text-center transition-all shadow-2xl shadow-blue-600/30 flex items-center justify-center gap-3 active:scale-95">
+              <a href={whatsappUrl} target="_blank" rel="noopener noreferrer" className="group bg-blue-600 hover:bg-blue-500 text-white px-10 py-5 rounded-2xl font-bold text-lg text-center transition-all shadow-2xl shadow-blue-600/40 flex items-center justify-center gap-3 active:scale-95">
                 <MessageCircle className="w-6 h-6 group-hover:rotate-12 transition-transform" />
                 Iniciar Orçamento
               </a>
               <button 
                 onClick={scrollToServices}
-                className="bg-slate-800/40 backdrop-blur-md hover:bg-slate-800 text-white px-10 py-5 rounded-2xl font-bold text-lg text-center transition-all border border-slate-700 hover:border-blue-500/50 active:scale-95"
+                className="bg-slate-800/60 backdrop-blur-xl hover:bg-slate-800 text-white px-10 py-5 rounded-2xl font-bold text-lg text-center transition-all border border-slate-700 hover:border-blue-500/50 active:scale-95"
               >
                 Conhecer Serviços
               </button>
             </div>
           </div>
-        </div>
-        
-        {/* Indicador de Scroll */}
-        <div className="absolute bottom-10 left-1/2 -translate-x-1/2 flex flex-col items-center gap-2 opacity-30 animate-bounce">
-          <div className="w-px h-12 bg-gradient-to-b from-blue-500 to-transparent"></div>
         </div>
       </section>
 
@@ -136,7 +130,7 @@ const App: React.FC = () => {
 
       <footer className="bg-slate-950 py-16 border-t border-slate-900">
         <div className="max-w-7xl mx-auto px-4 text-center">
-          <div className="font-industrial text-2xl mb-4">
+          <div className="font-industrial text-2xl mb-4 text-white">
             <span className="text-blue-500">ITAJAÍ</span> METAL<span className="text-blue-500">PRECISION</span>
           </div>
           <p className="text-slate-500 text-sm mb-8">
@@ -148,7 +142,6 @@ const App: React.FC = () => {
         </div>
       </footer>
 
-      {/* Administração */}
       <Suspense fallback={null}>
         <LeadDashboard />
         <Diagnostics />
