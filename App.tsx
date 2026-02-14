@@ -5,7 +5,7 @@ import ServiceSection from './components/ServiceSection';
 import AIQuoteAssistant from './components/AIQuoteAssistant';
 import ContactForm from './components/ContactForm';
 import WeldingBackground from './components/WeldingBackground';
-import { Layers, MessageCircle, Truck, Cog, Sparkles } from 'lucide-react';
+import { Layers, MessageCircle, Truck, Cog, Sparkles, QrCode } from 'lucide-react';
 
 const LeadDashboard = lazy(() => import('./components/LeadDashboard'));
 const Diagnostics = lazy(() => import('./components/Diagnostics'));
@@ -13,6 +13,8 @@ const Diagnostics = lazy(() => import('./components/Diagnostics'));
 const App: React.FC = () => {
   const whatsappNumber = "5547992460045";
   const whatsappUrl = `https://wa.me/${whatsappNumber}`;
+  const siteUrl = window.location.href;
+  const qrCodeUrl = `https://api.qrserver.com/v1/create-qr-code/?size=150x150&data=${encodeURIComponent(siteUrl)}&color=3b82f6&bgcolor=020617`;
 
   const scrollToServices = (e: React.MouseEvent) => {
     e.preventDefault();
@@ -27,6 +29,7 @@ const App: React.FC = () => {
       <Navbar />
 
       <section id="home" className="relative min-h-screen flex items-center overflow-hidden pt-20">
+        {/* Animação de Solda em z-20 */}
         <WeldingBackground />
         
         <div className="absolute top-0 left-1/2 -translate-x-1/2 w-full h-[600px] bg-blue-500/10 blur-[140px] rounded-full pointer-events-none z-10"></div>
@@ -38,6 +41,29 @@ const App: React.FC = () => {
             alt="Usinagem Industrial"
           />
           <div className="absolute inset-0 bg-gradient-to-b from-slate-950/40 via-slate-950/80 to-slate-950"></div>
+        </div>
+
+        {/* QR CODE - Posicionado "abaixo" dos respingos (z-10) e afastado 35% para a esquerda */}
+        <div className="absolute bottom-10 right-[35%] z-10 hidden lg:flex flex-col items-center animate-in fade-in slide-in-from-right-10 duration-1000 delay-500">
+          <div className="relative p-3 bg-slate-950/80 backdrop-blur-md border border-blue-500/30 rounded-2xl group transition-all hover:border-blue-500/60 shadow-2xl shadow-blue-500/5">
+            {/* Cantos de mira decorativos */}
+            <div className="absolute top-0 left-0 w-4 h-4 border-t-2 border-l-2 border-blue-500/50 rounded-tl-lg"></div>
+            <div className="absolute top-0 right-0 w-4 h-4 border-t-2 border-r-2 border-blue-500/50 rounded-tr-lg"></div>
+            <div className="absolute bottom-0 left-0 w-4 h-4 border-b-2 border-l-2 border-blue-500/50 rounded-bl-lg"></div>
+            <div className="absolute bottom-0 right-0 w-4 h-4 border-b-2 border-r-2 border-blue-500/50 rounded-br-lg"></div>
+            
+            <img 
+              src={qrCodeUrl} 
+              alt="QR Code do Site" 
+              className="w-24 h-24 opacity-80 group-hover:opacity-100 transition-opacity"
+            />
+          </div>
+          <div className="mt-3 flex items-center gap-2">
+            <QrCode className="w-3 h-3 text-blue-500" />
+            <span className="text-[10px] font-industrial text-blue-500/70 uppercase tracking-widest font-bold">
+              Acesso Mobile
+            </span>
+          </div>
         </div>
 
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 relative z-30 w-full py-20">
@@ -107,13 +133,13 @@ const App: React.FC = () => {
             <h3 className="text-4xl font-industrial text-white mb-8">Usinagem de Última Geração</h3>
             <div className="space-y-6">
               {[
-                { icon: <Layers />, title: "Prototipagem Ágil", desc: "Validação dimensional com impressão 3D antes da usinagem final." },
-                { icon: <Truck />, title: "Logística e Reboques", desc: "Manutenção técnica em eixos e estruturas de carretas e carretinhas." },
-                { icon: <Cog />, title: "Engenharia Reversa", desc: "Recuperação de peças fora de catálogo através de medição digital." }
+                { icon: Layers, title: "Prototipagem Ágil", desc: "Validação dimensional com impressão 3D antes da usinagem final." },
+                { icon: Truck, title: "Logística e Reboques", desc: "Manutenção técnica em eixos e estruturas de carretas e carretinhas." },
+                { icon: Cog, title: "Engenharia Reversa", desc: "Recuperação de peças fora de catálogo através de medição digital." }
               ].map((item, i) => (
                 <div key={i} className="flex gap-5 p-4 rounded-2xl hover:bg-slate-900 transition-colors border border-transparent hover:border-slate-800">
                   <div className="flex-shrink-0 w-12 h-12 bg-blue-600/10 rounded-xl flex items-center justify-center text-blue-500">
-                    {React.cloneElement(item.icon as React.ReactElement, { className: 'w-6 h-6' })}
+                    <item.icon className="w-6 h-6" />
                   </div>
                   <div>
                     <h4 className="text-lg font-bold text-white mb-1">{item.title}</h4>
