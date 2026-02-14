@@ -2,10 +2,20 @@
 import { GoogleGenAI, Type } from "@google/genai";
 import { AIResponse } from "../types";
 
-const ai = new GoogleGenAI({ apiKey: process.env.API_KEY || '' });
-
 export const analyzeProject = async (description: string): Promise<AIResponse> => {
+  const apiKey = process.env.API_KEY;
+
+  if (!apiKey) {
+    console.error("ERRO: Variável de ambiente API_KEY não configurada.");
+    return {
+      analysis: "O assistente de IA está temporariamente indisponível (chave de API ausente). Por favor, entre em contato diretamente via WhatsApp para seu orçamento.",
+      suggestedProcess: "Configuração Necessária",
+      complexity: "Média"
+    };
+  }
+
   try {
+    const ai = new GoogleGenAI({ apiKey });
     const response = await ai.models.generateContent({
       model: 'gemini-3-flash-preview',
       contents: `Você é um consultor técnico sênior da Itajaí Metal Precision. 
@@ -17,7 +27,6 @@ export const analyzeProject = async (description: string): Promise<AIResponse> =
       4. Carretinhas/Reboques (reforma estrutural e fabricação)
       5. Protótipos 3D (Impressão 3D funcional, modelagem CAD, validação de peças antes da usinagem)
 
-      Se o cliente descrever uma peça complexa que ainda não existe, sugira começar pelo Protótipo 3D para validar encaixes.
       Determine qual categoria se encaixa melhor e sugira o processo técnico ideal.
       Responda em formato JSON.`,
       config: {
@@ -43,7 +52,7 @@ export const analyzeProject = async (description: string): Promise<AIResponse> =
   } catch (error) {
     console.error("Erro na análise da IA:", error);
     return {
-      analysis: "Não foi possível analisar detalhadamente no momento. Nossa equipe técnica revisará seu projeto, incluindo a viabilidade de prototipagem 3D ou usinagem direta.",
+      analysis: "Não foi possível analisar detalhadamente no momento. Nossa equipe técnica revisará seu projeto via WhatsApp.",
       suggestedProcess: "Análise Técnica Pendente",
       complexity: "Média"
     };
