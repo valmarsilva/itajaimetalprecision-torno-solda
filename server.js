@@ -26,6 +26,7 @@ async function initLeadsFile() {
   }
 }
 
+// Rotas de API
 app.post('/api/leads', async (req, res) => {
   try {
     const newLead = req.body;
@@ -48,24 +49,18 @@ app.get('/api/leads', async (req, res) => {
   }
 });
 
-// Serve arquivos da DIST com cache agressivo
+// Serve arquivos estáticos da pasta DIST (gerada pelo build do Vite)
 const distPath = path.join(__dirname, 'dist');
-app.use(express.static(distPath, {
-  maxAge: '1d',
-  etag: true
-}));
 
+app.use(express.static(distPath));
+
+// Fallback para qualquer rota não-API retornar o index.html (SPA routing)
 app.get('*', (req, res) => {
   if (req.path.startsWith('/api')) return;
-  res.sendFile(path.join(distPath, 'index.html'), (err) => {
-    if (err) {
-      // Fallback para desenvolvimento
-      res.sendFile(path.join(__dirname, 'index.html'));
-    }
-  });
+  res.sendFile(path.join(distPath, 'index.html'));
 });
 
 app.listen(PORT, () => {
-  console.log(`🚀 Servidor voando na porta ${PORT}`);
+  console.log(`🚀 Servidor rodando na porta ${PORT}`);
   initLeadsFile();
 });

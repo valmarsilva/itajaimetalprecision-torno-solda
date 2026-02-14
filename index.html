@@ -31,13 +31,11 @@
       ::-webkit-scrollbar-thumb:hover {
         background: #3b82f6;
       }
-      /* Animação de entrada para evitar tela branca/preta */
-      #root {
-        animation: fadeIn 0.8s ease-out;
-      }
-      @keyframes fadeIn {
-        from { opacity: 0; }
-        to { opacity: 1; }
+      /* Previne flicker antes do React carregar */
+      #root:empty {
+        background: #020617;
+        width: 100vw;
+        height: 100vh;
       }
     </style>
   <script type="importmap">
