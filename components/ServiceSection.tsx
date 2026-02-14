@@ -5,7 +5,7 @@ import { Settings, Zap, Flame, Target, Truck, Sofa, Box, Layers } from 'lucide-r
 const services = [
   {
     id: 'torno',
-    title: 'Usinagem de Precisão',
+    title: 'Usinagem Industrial',
     icon: <Settings className="w-8 h-8 text-blue-500" />,
     description: 'Fabricação e recuperação de componentes mecânicos industriais com acabamento de alta qualidade.',
     features: ['Torno Mecânico', 'Peças Sob Medida', 'Usinagem Geral']
@@ -14,7 +14,7 @@ const services = [
     id: 'prototipos-3d',
     title: 'Protótipos e Impressão 3D',
     icon: <Layers className="w-8 h-8 text-indigo-500" />,
-    description: 'Desenvolvimento de protótipos funcionais em 3D para validação de projetos e engenharia.',
+    description: 'Desenvolvimento de protótipos funcionais em 3D para validação de projetos e modelos técnicos.',
     features: ['Modelagem CAD', 'Impressão FDM/Resina', 'Peças de Reposição']
   },
   {
@@ -46,7 +46,7 @@ const ServiceSection: React.FC = () => {
       <div className="max-w-7xl mx-auto px-4">
         <div className="text-center mb-16">
           <h2 className="text-blue-500 font-bold tracking-widest uppercase mb-4">Nossa Expertise</h2>
-          <h3 className="text-4xl md:text-5xl font-industrial text-white uppercase">Soluções de Engenharia e Metal</h3>
+          <h3 className="text-4xl md:text-5xl font-industrial text-white uppercase">Soluções em Metal e Manutenção</h3>
         </div>
         
         <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 xl:grid-cols-5 gap-6">

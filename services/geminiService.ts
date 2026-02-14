@@ -8,7 +8,7 @@ export const analyzeProject = async (description: string): Promise<AIResponse> =
   if (!apiKey) {
     console.error("ERRO: Variável de ambiente API_KEY não configurada.");
     return {
-      analysis: "O assistente de IA está temporariamente indisponível. Por favor, entre em contato diretamente via WhatsApp para seu orçamento.",
+      analysis: "O sistema está temporariamente indisponível. Por favor, entre em contato diretamente via WhatsApp para seu orçamento.",
       suggestedProcess: "Configuração Necessária",
       complexity: "Média"
     };
@@ -18,10 +18,10 @@ export const analyzeProject = async (description: string): Promise<AIResponse> =
     const ai = new GoogleGenAI({ apiKey });
     const response = await ai.models.generateContent({
       model: 'gemini-3-flash-preview',
-      contents: `Você é um consultor técnico sênior da Itajaí Metal Precision. 
+      contents: `Você é um especialista técnico da Itajaí Metal Precision. 
       Analise o seguinte projeto: "${description}". 
       Nossa empresa é especialista em: 
-      1. Torno e Usinagem Mecânica: Fabricação e reparo de peças diversas.
+      1. Torno e Usinagem Industrial: Fabricação e reparo de peças diversas.
       2. Solda MIG/TIG: Inox, Alumínio, Aço e recuperação de componentes metálicos.
       3. Móveis Industriais e Estruturas Metálicas.
       4. Carretinhas/Reboques: Reforma estrutural e fabricação sob medida.
@@ -52,7 +52,7 @@ export const analyzeProject = async (description: string): Promise<AIResponse> =
   } catch (error) {
     console.error("Erro na análise da IA:", error);
     return {
-      analysis: "Não foi possível analisar detalhadamente no momento. Nossa equipe técnica revisará seu projeto via WhatsApp.",
+      analysis: "Não foi possível analisar detalhadamente no momento. Nossa equipe revisará seu projeto via WhatsApp.",
       suggestedProcess: "Análise Técnica Pendente",
       complexity: "Média"
     };

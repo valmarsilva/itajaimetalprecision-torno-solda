@@ -105,10 +105,10 @@ const AIQuoteAssistant: React.FC = () => {
           <div className="bg-gradient-to-r from-blue-600 to-indigo-700 p-8 text-white">
             <div className="flex items-center gap-3 mb-2">
               <Sparkles className="w-6 h-6" />
-              <h2 className="text-2xl font-bold">Assistente Técnico Inteligente</h2>
+              <h2 className="text-2xl font-bold">Consultor de Projetos</h2>
             </div>
             <p className="text-blue-100 opacity-90">
-              Descreva seu projeto ou peça e nossa IA sugerirá o melhor processo de fabricação instantaneamente.
+              Descreva sua peça e nosso sistema sugerirá o melhor processo de fabricação instantaneamente.
             </p>
           </div>
 
@@ -134,12 +134,12 @@ const AIQuoteAssistant: React.FC = () => {
                 {loading ? (
                   <>
                     <Loader2 className="w-5 h-5 animate-spin" />
-                    Analisando Projeto...
+                    Analisando...
                   </>
                 ) : (
                   <>
                     <Send className="w-5 h-5" />
-                    Obter Recomendação Técnica
+                    Obter Recomendação
                   </>
                 )}
               </button>
@@ -150,14 +150,14 @@ const AIQuoteAssistant: React.FC = () => {
                 <div className="flex flex-wrap items-center justify-between gap-4 mb-4">
                   <div className="flex items-center gap-2">
                     <CheckCircle2 className="w-6 h-6 text-blue-500" />
-                    <h3 className="text-xl font-bold text-white">Sugestão Técnica</h3>
+                    <h3 className="text-xl font-bold text-white">Sugestão</h3>
                   </div>
                   <div className="flex gap-2">
                     <span className="px-3 py-1 rounded-full bg-blue-500/10 text-blue-400 text-xs font-bold uppercase tracking-wider border border-blue-500/20">
                       {analysis.suggestedProcess}
                     </span>
                     <span className={`px-3 py-1 rounded-full text-xs font-bold uppercase tracking-wider border border-current ${getComplexityColor(analysis.complexity)}`}>
-                      Complexidade: {analysis.complexity}
+                      Nível: {analysis.complexity}
                     </span>
                   </div>
                 </div>
@@ -169,13 +169,13 @@ const AIQuoteAssistant: React.FC = () => {
                 </div>
 
                 <div className="mt-6 pt-6 border-t border-slate-700 flex flex-col sm:flex-row items-center justify-between gap-4">
-                  <p className="text-sm text-slate-400">Gostou da análise? Fale agora com Valmar Silva.</p>
+                  <p className="text-sm text-slate-400">Gostou da sugestão? Fale agora com Valmar Silva.</p>
                   <button 
                     onClick={() => handleWhatsAppChat(description)}
                     className="w-full sm:w-auto px-8 py-3 bg-green-600 text-white font-bold rounded-lg hover:bg-green-700 transition-colors flex items-center justify-center gap-2"
                   >
                     <MessageCircle className="w-5 h-5" />
-                    Enviar Orçamento via WhatsApp
+                    Enviar via WhatsApp
                   </button>
                 </div>
               </div>
@@ -187,7 +187,7 @@ const AIQuoteAssistant: React.FC = () => {
                 <div className="flex items-center justify-between mb-4">
                   <div className="flex items-center gap-2 text-slate-400">
                     <History className="w-4 h-4" />
-                    <h4 className="text-sm font-bold uppercase tracking-widest">Histórico Recente</h4>
+                    <h4 className="text-sm font-bold uppercase tracking-widest">Consultas Recentes</h4>
                   </div>
                   <button 
                     onClick={clearHistory}

@@ -93,7 +93,7 @@ const App: React.FC = () => {
             </div>
 
             <p className="text-lg text-slate-400 mb-12 leading-relaxed max-w-xl border-l-2 border-blue-500/30 pl-6">
-              Soluções em metalurgia de alta precisão. Do reparo de peças industriais ao desenvolvimento de protótipos complexos com engenharia de ponta.
+              Soluções em metalurgia de alta qualidade. Do reparo de peças industriais ao desenvolvimento de protótipos sob medida.
             </p>
 
             <div className="flex flex-col sm:flex-row gap-5">
@@ -140,9 +140,9 @@ const App: React.FC = () => {
             <h3 className="text-4xl font-industrial text-white mb-8 uppercase">Usinagem de Alta Performance</h3>
             <div className="grid gap-4">
               {[
-                { icon: Layers, title: "Prototipagem Ágil", desc: "Desenvolvimento rápido de peças piloto com validação dimensional." },
+                { icon: Layers, title: "Prototipagem Ágil", desc: "Desenvolvimento rápido de peças piloto com validação de medidas." },
                 { icon: Truck, title: "Manutenção de Eixos", desc: "Recuperação especializada em eixos e estruturas de reboques." },
-                { icon: Cog, title: "Engenharia Reversa", desc: "Fabricação de componentes descontinuados a partir de amostras." }
+                { icon: Cog, title: "Recuperação de Componentes", desc: "Fabricação de peças descontinuadas a partir de amostras." }
               ].map((item, i) => (
                 <div key={i} className="flex gap-5 p-5 rounded-xl hover:bg-slate-900/50 transition-all border border-transparent hover:border-slate-800 group">
                   <div className="flex-shrink-0 w-12 h-12 bg-blue-600/10 rounded-lg flex items-center justify-center text-blue-500 group-hover:bg-blue-600 group-hover:text-white transition-all">
@@ -165,7 +165,7 @@ const App: React.FC = () => {
             <span className="text-blue-500">ITAJAÍ</span> METAL<span className="text-blue-500">PRECISION</span>
           </div>
           <p className="text-slate-500 text-xs mb-8 uppercase tracking-widest">
-            Usinagem • Soldagem • Engenharia • Valmar Silva
+            Usinagem • Soldagem • Serviços • Valmar Silva
           </p>
           <div className="h-px w-24 bg-blue-500/20 mx-auto mb-8"></div>
           <p className="text-slate-700 text-[10px] uppercase tracking-[0.3em]">

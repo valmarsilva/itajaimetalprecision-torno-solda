@@ -38,7 +38,7 @@ const ContactForm: React.FC = () => {
           <h3 className="text-4xl font-industrial text-white mb-6 uppercase">Inicie seu Projeto</h3>
           <p className="text-slate-400 text-lg mb-8 leading-relaxed">
             Preencha os dados abaixo e entraremos em contato com uma proposta técnica detalhada. 
-            Nossa equipe analisa cada pedido individualmente para garantir a máxima precisão.
+            Nossa equipe analisa cada pedido individualmente para garantir a máxima qualidade.
           </p>
           
           <div className="space-y-6">
@@ -52,7 +52,7 @@ const ContactForm: React.FC = () => {
               <div className="w-12 h-12 bg-blue-600/10 rounded-full flex items-center justify-center text-blue-500">
                 <CheckCircle className="w-6 h-6" />
               </div>
-              <span>Desenvolvimento de protótipos 3D e usinagem CNC.</span>
+              <span>Desenvolvimento de protótipos e usinagem sob medida.</span>
             </div>
           </div>
         </div>
@@ -114,7 +114,7 @@ const ContactForm: React.FC = () => {
                 >
                   <option value="Torno">Usinagem / Torno</option>
                   <option value="Solda MIG/TIG">Solda Técnica (MIG/TIG)</option>
-                  <option value="Protótipos 3D">Protótipos 3D / Impressão 3D</option>
+                  <option value="Protótipos 3D">Protótipos / Impressão 3D</option>
                   <option value="Móveis Industriais">Móveis Industriais</option>
                   <option value="Carretinhas">Carretinhas / Reboques</option>
                   <option value="Outro">Outro / Especial</option>
@@ -147,7 +147,7 @@ const ContactForm: React.FC = () => {
                 ) : (
                   <>
                     <Send className="w-5 h-5" />
-                    Solicitar Orçamento Oficial
+                    Solicitar Orçamento
                   </>
                 )}
               </button>
