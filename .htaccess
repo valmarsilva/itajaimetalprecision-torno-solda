@@ -1,0 +1,21 @@
+
+<IfModule mod_rewrite.c>
+  RewriteEngine On
+  RewriteBase /
+  
+  # Forçar tipo MIME correto para JavaScript e CSS
+  AddType application/javascript .js
+  AddType text/css .css
+  
+  # Redirecionar todas as requisições para o index.html (SPA Routing)
+  # Isso evita erro 404 ao atualizar a página em rotas internas
+  RewriteRule ^index\.html$ - [L]
+  RewriteCond %{REQUEST_FILENAME} !-f
+  RewriteCond %{REQUEST_FILENAME} !-d
+  RewriteRule . /index.html [L]
+</IfModule>
+
+# Desabilitar cache de arquivos estáticos durante testes (opcional)
+<IfModule mod_expires.c>
+  ExpiresActive Off
+</IfModule>
