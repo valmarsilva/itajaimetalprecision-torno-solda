@@ -35,28 +35,38 @@ const WeldingBackground: React.FC = () => {
       maxLife: number;
       color: string;
       size: number;
+      glowColor: string;
 
       constructor(x: number, y: number) {
         this.x = x;
         this.y = y;
-        // Velocidade mais explosiva para parecer solda real
-        this.vx = (Math.random() - 0.5) * 12; 
-        this.vy = (Math.random() - 0.7) * 15;
-        this.maxLife = Math.random() * 40 + 20;
+        // Velocidade variada para faíscas pesadas e leves
+        const power = Math.random() > 0.8 ? 15 : 8;
+        this.vx = (Math.random() - 0.5) * power; 
+        this.vy = (Math.random() - 0.8) * power;
+        this.maxLife = Math.random() * 50 + 30;
         this.life = this.maxLife;
-        this.size = Math.random() * 3 + 1;
+        this.size = Math.random() * 2.5 + 0.5;
         
-        // Cores de plasma e metal incandescente
-        const colors = ['#3b82f6', '#60a5fa', '#ffffff', '#fbbf24', '#f59e0b', '#00d4ff'];
-        this.color = colors[Math.floor(Math.random() * colors.length)];
+        // Cores de metal incandescente
+        const colors = [
+          { main: '#ffffff', glow: '#3b82f6' }, // Plasma Branco/Azul
+          { main: '#3b82f6', glow: '#1d4ed8' }, // Azul Solda
+          { main: '#fbbf24', glow: '#f59e0b' }, // Faísca Amarela
+          { main: '#f97316', glow: '#ea580c' }  // Faísca Laranja
+        ];
+        const selected = colors[Math.floor(Math.random() * colors.length)];
+        this.color = selected.main;
+        this.glowColor = selected.glow;
       }
 
       update() {
         this.x += this.vx;
         this.y += this.vy;
-        this.vy += 0.25; // Gravidade
+        this.vy += 0.3; // Gravidade mais forte para efeito realista
+        this.vx *= 0.99; // Atrito do ar
         this.life--;
-        this.size *= 0.96; 
+        this.size *= 0.97; 
       }
 
       draw(ctx: CanvasRenderingContext2D) {
@@ -64,9 +74,9 @@ const WeldingBackground: React.FC = () => {
         ctx.save();
         ctx.globalAlpha = opacity;
         
-        // Efeito de brilho (Bloom)
-        ctx.shadowBlur = 10;
-        ctx.shadowColor = this.color;
+        // Brilho intenso da faísca
+        ctx.shadowBlur = 12;
+        ctx.shadowColor = this.glowColor;
         
         ctx.beginPath();
         ctx.arc(this.x, this.y, this.size, 0, Math.PI * 2);
@@ -77,34 +87,41 @@ const WeldingBackground: React.FC = () => {
     }
 
     const animate = () => {
-      // Limpeza suave para rastro de movimento
-      ctx.fillStyle = 'rgba(2, 6, 23, 0.15)';
+      // Background com motion blur mais denso
+      ctx.fillStyle = 'rgba(2, 6, 23, 0.2)';
       ctx.fillRect(0, 0, width, height);
 
-      // Faíscas mais frequentes
-      if (Math.random() > 0.85) {
-        // Surge em pontos aleatórios da metade direita (onde geralmente está a "usinagem")
-        const spawnX = width * (0.6 + Math.random() * 0.3);
-        const spawnY = height * (0.2 + Math.random() * 0.4);
+      // Ponto de soldagem principal (Lado direito superior/médio)
+      if (Math.random() > 0.82) {
+        const spawnX = width * (0.55 + Math.random() * 0.35);
+        const spawnY = height * (0.25 + Math.random() * 0.45);
         
-        // Explosão de luz momentânea
-        ctx.save();
-        ctx.beginPath();
-        ctx.arc(spawnX, spawnY, 20, 0, Math.PI * 2);
-        ctx.fillStyle = 'rgba(59, 130, 246, 0.1)';
-        ctx.fill();
-        ctx.restore();
+        // Flash de luz azul rápido (arco voltaico)
+        if (Math.random() > 0.95) {
+          ctx.save();
+          const gradient = ctx.createRadialGradient(spawnX, spawnY, 0, spawnX, spawnY, 150);
+          gradient.addColorStop(0, 'rgba(59, 130, 246, 0.15)');
+          gradient.addColorStop(1, 'rgba(59, 130, 246, 0)');
+          ctx.fillStyle = gradient;
+          ctx.fillRect(0, 0, width, height);
+          ctx.restore();
+        }
 
-        for(let i = 0; i < 8; i++) {
+        for(let i = 0; i < 6; i++) {
           particles.push(new Particle(spawnX, spawnY));
         }
+      }
+
+      // Partículas extras para garantir movimento sobre a área do QR Code
+      if (Math.random() > 0.95) {
+        particles.push(new Particle(width * 0.6, height * 0.8));
       }
 
       for (let i = particles.length - 1; i >= 0; i--) {
         const p = particles[i];
         p.update();
         p.draw(ctx);
-        if (p.life <= 0 || p.size < 0.1) particles.splice(i, 1);
+        if (p.life <= 0 || p.size < 0.2) particles.splice(i, 1);
       }
 
       animationFrameId = requestAnimationFrame(animate);
