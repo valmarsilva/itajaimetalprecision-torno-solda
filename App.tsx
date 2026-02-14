@@ -29,8 +29,7 @@ const App: React.FC = () => {
       <section id="home" className="relative min-h-screen flex items-center overflow-hidden pt-20">
         <WeldingBackground />
         
-        {/* Camada de Luminosidade Superior - Azul Vibrante */}
-        <div className="absolute top-0 left-1/2 -translate-x-1/2 w-full h-[600px] bg-blue-500/10 blur-[140px] rounded-full pointer-events-none"></div>
+        <div className="absolute top-0 left-1/2 -translate-x-1/2 w-full h-[600px] bg-blue-500/10 blur-[140px] rounded-full pointer-events-none z-10"></div>
         
         <div className="absolute inset-0 z-0">
           <img 
@@ -41,7 +40,7 @@ const App: React.FC = () => {
           <div className="absolute inset-0 bg-gradient-to-b from-slate-950/40 via-slate-950/80 to-slate-950"></div>
         </div>
 
-        <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 relative z-10 w-full py-20">
+        <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 relative z-30 w-full py-20">
           <div className="max-w-3xl">
             <div className="inline-flex items-center gap-2 px-4 py-1.5 rounded-full bg-blue-500/20 border border-blue-400/40 text-blue-300 text-sm font-bold mb-8 uppercase tracking-widest backdrop-blur-md animate-pulse">
               <Sparkles className="w-4 h-4" />
@@ -56,12 +55,12 @@ const App: React.FC = () => {
             <div className="flex items-center gap-3 mb-8">
               <div className="h-px w-12 bg-blue-500"></div>
               <p className="text-xl md:text-2xl text-white font-bold tracking-tight uppercase">
-                Protótipos 3D <span className="text-blue-500 mx-2">|</span> ABS • PETG • PLA
+                Torno Mecânico <span className="text-blue-500 mx-2">|</span> Soldagem MIG/TIG
               </p>
             </div>
 
             <p className="text-lg md:text-xl text-slate-300 mb-12 leading-relaxed max-w-2xl border-l-2 border-blue-500/50 pl-6">
-              Especialistas em componentes de alta precisão, soldagem MIG/TIG de Inox e Alumínio, e desenvolvimento de projetos do protótipo à peça final.
+              Especialistas em componentes industriais, soldagem de alta performance e desenvolvimento de projetos do protótipo à peça final.
             </p>
 
             <div className="flex flex-col sm:flex-row gap-5">
@@ -89,7 +88,6 @@ const App: React.FC = () => {
 
       <ContactForm />
 
-      {/* Seção de Qualidade */}
       <section className="py-24 bg-slate-950 border-t border-slate-900">
         <div className="max-w-7xl mx-auto px-4 grid grid-cols-1 md:grid-cols-2 gap-16 items-center">
           <div className="relative group">

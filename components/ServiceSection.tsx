@@ -7,8 +7,8 @@ const services = [
     id: 'torno',
     title: 'Usinagem de Precisão',
     icon: <Settings className="w-8 h-8 text-blue-500" />,
-    description: 'Fabricação técnica de eixos, porcas e peças cilíndricas com tolerâncias rigorosas.',
-    features: ['Eixos Industriais', 'Porcas Especiais', 'Torno Mecânico']
+    description: 'Fabricação e recuperação de componentes mecânicos industriais com acabamento de alta qualidade.',
+    features: ['Torno Mecânico', 'Peças Sob Medida', 'Usinagem Geral']
   },
   {
     id: 'prototipos-3d',
