@@ -80,13 +80,13 @@ const App: React.FC = () => {
       </section>
 
       <ServiceSection />
+
+      <ContactForm />
       
       <div className="relative">
         <div className="absolute inset-0 bg-blue-600/5 pointer-events-none"></div>
         <AIQuoteAssistant />
       </div>
-
-      <ContactForm />
 
       <section className="py-24 bg-slate-950 border-t border-slate-900">
         <div className="max-w-7xl mx-auto px-4 grid grid-cols-1 md:grid-cols-2 gap-16 items-center">
