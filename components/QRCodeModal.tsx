@@ -1,4 +1,3 @@
-
 import React from 'react';
 import { X, QrCode, Download, Share2 } from 'lucide-react';
 
@@ -17,7 +16,7 @@ const QRCodeModal: React.FC<QRCodeModalProps> = ({ isOpen, onClose }) => {
     if (navigator.share) {
       try {
         await navigator.share({
-          title: 'Itajaí Metal Precision',
+          title: 'Itajaí Metal',
           text: 'Conheça nossos serviços de Usinagem e Solda Técnica!',
           url: siteUrl,
         });
@@ -71,7 +70,7 @@ const QRCodeModal: React.FC<QRCodeModalProps> = ({ isOpen, onClose }) => {
         
         <div className="bg-slate-800/30 p-4 text-center border-t border-slate-800">
           <span className="text-[9px] text-slate-600 font-mono uppercase tracking-tighter">
-            itajaimetalprecision.com.br
+            itajaimetal.com.br
           </span>
         </div>
       </div>

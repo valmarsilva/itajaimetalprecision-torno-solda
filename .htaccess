@@ -1,27 +1,35 @@
 <IfModule mod_mime.c>
+  # Força o tipo JavaScript para todas as extensões de script possíveis
   AddType application/javascript .js
   AddType application/javascript .mjs
+  AddType application/javascript .ts
+  AddType application/javascript .tsx
   AddType text/css .css
+  AddType image/svg+xml .svg
 </IfModule>
 
 <IfModule mod_headers.c>
+  # Impede o bloqueio por 'MIME type mismatch' (solução direta para o erro de tela azul/escuro)
   Header set X-Content-Type-Options "nosniff"
+  
+  # Habilita CORS para permitir carregamento de módulos externos se necessário
+  Header set Access-Control-Allow-Origin "*"
 </IfModule>
 
 <IfModule mod_rewrite.c>
   RewriteEngine On
   RewriteBase /
   
-  # Regra para não processar arquivos reais (imagens, js, css)
+  # Se o arquivo solicitado existir, serve ele diretamente
   RewriteCond %{REQUEST_FILENAME} -f [OR]
   RewriteCond %{REQUEST_FILENAME} -d
   RewriteRule ^ - [L]
 
-  # Redirecionar todas as outras requisições para o index.html (SPA Routing)
+  # Caso contrário, manda para o index.html (essencial para sites React/Vite)
   RewriteRule ^ index.html [L]
 </IfModule>
 
-# Desabilitar cache temporariamente para propagar mudanças
+# Desativa o cache durante os testes para garantir que você veja a mudança na hora
 <IfModule mod_expires.c>
   ExpiresActive Off
 </IfModule>

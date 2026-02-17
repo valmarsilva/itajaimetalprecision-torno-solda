@@ -59,7 +59,7 @@ const App: React.FC = () => {
           </div>
           <div className="mt-4 flex flex-col items-center gap-1 opacity-50 group-hover:opacity-100 transition-opacity">
             <span className="text-[9px] font-industrial text-blue-400 uppercase tracking-[0.3em] font-bold">
-              Scan Tech-Link
+              Tech-Link
             </span>
             <div className="h-0.5 w-8 bg-gradient-to-r from-transparent via-blue-500/50 to-transparent"></div>
           </div>
@@ -85,7 +85,7 @@ const App: React.FC = () => {
             </div>
 
             <p className="text-lg text-slate-400 mb-12 leading-relaxed max-w-xl border-l-2 border-blue-500/30 pl-6">
-              Soluções em metalurgia de alta qualidade. Do reparo de peças industriais ao desenvolvimento de protótipos sob medida.
+              Serviços de metalurgia de alto padrão. Do reparo de peças industriais ao desenvolvimento de protótipos sob medida.
             </p>
 
             <div className="flex flex-col sm:flex-row gap-5">
@@ -129,7 +129,7 @@ const App: React.FC = () => {
           
           <div>
             <h2 className="text-blue-500 font-bold tracking-widest uppercase mb-4 text-xs">Excelência Técnica</h2>
-            <h3 className="text-4xl font-industrial text-white mb-8 uppercase">Usinagem de Alta Performance</h3>
+            <h3 className="text-4xl font-industrial text-white mb-8 uppercase">Usinagem de Alta Qualidade</h3>
             <div className="grid gap-4">
               {[
                 { icon: Layers, title: "Prototipagem Ágil", desc: "Desenvolvimento rápido de peças piloto com validação de medidas." },
@@ -153,7 +153,7 @@ const App: React.FC = () => {
 
       <footer className="bg-slate-950 py-16 border-t border-slate-900">
         <div className="max-w-7xl mx-auto px-4 text-center">
-          <div className="font-industrial text-2xl mb-4 text-white">
+          <div className="font-industrial text-2xl mb-4 text-white uppercase">
             <span className="text-blue-500">ITAJAÍ</span> METAL
           </div>
           <p className="text-slate-500 text-xs mb-8 uppercase tracking-widest">
