@@ -1,4 +1,3 @@
-
 import express from 'express';
 import cors from 'cors';
 import bodyParser from 'body-parser';
@@ -36,7 +35,7 @@ app.post('/api/leads', async (req, res) => {
     await fs.writeFile(LEADS_FILE, JSON.stringify(leads, null, 2));
     res.status(201).json({ success: true });
   } catch (error) {
-    res.status(500).json({ error: 'Erro ao salvar' });
+    res.status(500).json({ error: 'Erro ao salvar lead' });
   }
 });
 
@@ -45,22 +44,24 @@ app.get('/api/leads', async (req, res) => {
     const data = await fs.readFile(LEADS_FILE, 'utf-8');
     res.json(JSON.parse(data));
   } catch (error) {
-    res.status(500).json({ error: 'Erro ao ler' });
+    res.status(500).json({ error: 'Erro ao ler leads' });
   }
 });
 
-// Serve arquivos estáticos da pasta DIST (gerada pelo build do Vite)
+// Detecta se existe a pasta dist ou se deve servir da raiz
 const distPath = path.join(__dirname, 'dist');
+const publicPath = (await fs.access(distPath).then(() => true).catch(() => false)) ? distPath : __dirname;
 
-app.use(express.static(distPath));
+app.use(express.static(publicPath));
 
-// Fallback para qualquer rota não-API retornar o index.html (SPA routing)
+// Fallback para SPA
 app.get('*', (req, res) => {
   if (req.path.startsWith('/api')) return;
-  res.sendFile(path.join(distPath, 'index.html'));
+  res.sendFile(path.join(publicPath, 'index.html'));
 });
 
 app.listen(PORT, () => {
   console.log(`🚀 Servidor rodando na porta ${PORT}`);
+  console.log(`📂 Servindo arquivos de: ${publicPath}`);
   initLeadsFile();
 });

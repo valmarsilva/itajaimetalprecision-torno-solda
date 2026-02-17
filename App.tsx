@@ -18,6 +18,7 @@ const App: React.FC = () => {
   
   useEffect(() => {
     if (typeof window !== 'undefined') {
+      // Usa a origem atual (ex: techprocursos-com...hostingersite.com)
       setCurrentUrl(window.location.origin);
     }
   }, []);
@@ -68,7 +69,7 @@ const App: React.FC = () => {
           </div>
           <div className="mt-4 flex flex-col items-center gap-1 opacity-50 group-hover:opacity-100 transition-opacity">
             <span className="text-[9px] font-industrial text-blue-400 uppercase tracking-[0.3em] font-bold">
-              Tech-Link
+              Scan-to-Visit
             </span>
             <div className="h-0.5 w-8 bg-gradient-to-r from-transparent via-blue-500/50 to-transparent"></div>
           </div>

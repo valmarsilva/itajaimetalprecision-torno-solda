@@ -58,6 +58,8 @@
     "react-dom/client": "https://esm.sh/react-dom@19.0.0/client",
     "@google/genai": "https://esm.sh/@google/genai@1.41.0",
     "lucide-react": "https://esm.sh/lucide-react@0.474.0",
+    "react-dom/": "https://esm.sh/react-dom@^19.2.4/",
+    "react/": "https://esm.sh/react@^19.2.4/",
     "express": "https://esm.sh/express@^5.2.1",
     "cors": "https://esm.sh/cors@^2.8.6",
     "body-parser": "https://esm.sh/body-parser@^2.2.2",
@@ -66,25 +68,29 @@
     "path": "https://esm.sh/path@^0.12.7",
     "url": "https://esm.sh/url@^0.11.4",
     "vite": "https://esm.sh/vite@^7.3.1",
-    "@vitejs/plugin-react": "https://esm.sh/@vitejs/plugin-react@^5.1.4",
-    "react/": "https://esm.sh/react@^19.2.4/",
-    "react-dom/": "https://esm.sh/react-dom@^19.2.4/"
+    "@vitejs/plugin-react": "https://esm.sh/@vitejs/plugin-react@^5.1.4"
   }
 }
 </script>
 </head>
   <body class="text-slate-100 antialiased overflow-x-hidden">
     <div id="root"></div>
-    <div id="errorMessage" class="load-error font-industrial">ERRO NO CARREGAMENTO DOS MÓDULOS</div>
+    <div id="errorMessage" class="load-error font-industrial">SISTEMA OFFLINE - RECARREGUE A PÁGINA</div>
     
     <script type="module">
-      // Monitor de carregamento
+      // Monitor de falha de carregamento do React
+      window.addEventListener('error', function(e) {
+        if (e.target.src && e.target.src.includes('index.tsx')) {
+          document.getElementById('errorMessage').style.display = 'block';
+        }
+      }, true);
+
       setTimeout(() => {
         const root = document.getElementById('root');
         if (root && root.innerHTML === "") {
           document.getElementById('errorMessage').style.display = 'block';
         }
-      }, 8000);
+      }, 10000);
     </script>
     
     <script type="module" src="./index.tsx"></script>

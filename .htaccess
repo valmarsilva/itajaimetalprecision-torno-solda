@@ -1,26 +1,20 @@
-<IfModule mod_mime.c>
-  AddType application/javascript .js
-  AddType application/javascript .mjs
-  AddType text/css .css
-</IfModule>
-
-<IfModule mod_headers.c>
-  Header set X-Content-Type-Options "nosniff"
-  # Limpa cache durante a transição para evitar erros de versão
-  Header set Cache-Control "no-cache, no-store, must-revalidate"
-  Header set Pragma "no-cache"
-  Header set Expires 0
-</IfModule>
+DirectoryIndex index.html
 
 <IfModule mod_rewrite.c>
   RewriteEngine On
   RewriteBase /
   
-  # Ignorar solicitações para arquivos físicos
+  # Se o arquivo existe (como fotos ou css), abre ele direto
   RewriteCond %{REQUEST_FILENAME} -f [OR]
   RewriteCond %{REQUEST_FILENAME} -d
   RewriteRule ^ - [L]
 
-  # Redirecionar todas as outras URLs para index.html
+  # Se o arquivo não existe, manda pro index.html (essencial para sites React)
   RewriteRule ^ index.html [L]
+</IfModule>
+
+<IfModule mod_mime.c>
+  AddType application/javascript .js
+  AddType application/javascript .mjs
+  AddType application/javascript .tsx
 </IfModule>
