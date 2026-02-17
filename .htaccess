@@ -1,21 +1,30 @@
 
+# Forçar tipos MIME corretos para módulos JavaScript
+<IfModule mod_mime.c>
+  AddType application/javascript .js
+  AddType application/javascript .mjs
+  AddType text/css .css
+</IfModule>
+
+# Impedir que o navegador tente "adivinhar" o tipo de arquivo (evita o erro de MIME bloqueado)
+<IfModule mod_headers.c>
+  Header set X-Content-Type-Options "nosniff"
+</IfModule>
+
 <IfModule mod_rewrite.c>
   RewriteEngine On
   RewriteBase /
   
-  # Forçar tipo MIME correto para JavaScript e CSS
-  AddType application/javascript .js
-  AddType text/css .css
-  
-  # Redirecionar todas as requisições para o index.html (SPA Routing)
-  # Isso evita erro 404 ao atualizar a página em rotas internas
-  RewriteRule ^index\.html$ - [L]
-  RewriteCond %{REQUEST_FILENAME} !-f
-  RewriteCond %{REQUEST_FILENAME} !-d
-  RewriteRule . /index.html [L]
+  # Regra para não processar arquivos reais (imagens, js, css)
+  RewriteCond %{REQUEST_FILENAME} -f [OR]
+  RewriteCond %{REQUEST_FILENAME} -d
+  RewriteRule ^ - [L]
+
+  # Redirecionar todas as outras requisições para o index.html (SPA Routing)
+  RewriteRule ^ index.html [L]
 </IfModule>
 
-# Desabilitar cache de arquivos estáticos durante testes (opcional)
+# Desabilitar cache durante a fase de ajuste para garantir que as mudanças no .htaccess sejam lidas
 <IfModule mod_expires.c>
   ExpiresActive Off
 </IfModule>

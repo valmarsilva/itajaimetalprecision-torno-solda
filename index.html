@@ -3,6 +3,7 @@
 <html lang="pt-BR" class="scroll-smooth">
   <head>
     <meta charset="UTF-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <title>Itajaí Metal Precision | Torno e Solda</title>
     <script src="https://cdn.tailwindcss.com"></script>
@@ -25,7 +26,7 @@
         background: #020617;
       }
       #root:empty::after {
-        content: "CARREGANDO SISTEMA...";
+        content: "INICIALIZANDO SISTEMA...";
         color: #3b82f6;
         font-family: 'Orbitron', sans-serif;
         font-size: 10px;
@@ -63,6 +64,6 @@
 </head>
   <body class="text-slate-100 antialiased overflow-x-hidden">
     <div id="root"></div>
-    <script type="module" src="/index.tsx"></script>
+    <script type="module" src="./index.tsx"></script>
   </body>
 </html>
