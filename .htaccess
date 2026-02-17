@@ -1,29 +1,35 @@
-# Impede a listagem de diretórios
+# Configurações para Itajaí Metal - Hostinger
 Options -Indexes
-
-# Define o arquivo padrão
 DirectoryIndex index.html
 
 <IfModule mod_rewrite.c>
   RewriteEngine On
   RewriteBase /
   
-  # Redireciona para HTTPS (Opcional, mas recomendado se tiver SSL)
-  # RewriteCond %{HTTPS} off
-  # RewriteRule ^(.*)$ https://%{HTTP_HOST}%{REQUEST_URI} [L,R=301]
+  # Redirecionamento HTTPS
+  RewriteCond %{HTTPS} off
+  RewriteRule ^(.*)$ https://%{HTTP_HOST}%{REQUEST_URI} [L,R=301]
 
-  # Se o arquivo solicitado existe, serve ele normalmente
+  # Se o arquivo existir, serve ele
   RewriteCond %{REQUEST_FILENAME} -f [OR]
   RewriteCond %{REQUEST_FILENAME} -d
   RewriteRule ^ - [L]
 
-  # Caso contrário, manda tudo para o index.html
+  # SPA: Redireciona tudo para o index.html
   RewriteRule ^ index.html [L]
 </IfModule>
 
-# Garante que arquivos .js e .tsx sejam servidos como javascript
+# FORÇAR MIME TYPES (Resolve o erro text/plain)
 <IfModule mod_mime.c>
   AddType application/javascript .js
   AddType application/javascript .mjs
   AddType application/javascript .tsx
+  AddType application/javascript .jsx
+  AddType text/css .css
+</IfModule>
+
+# Garantir que o servidor não bloqueie os scripts
+<IfModule mod_headers.c>
+  Header set Access-Control-Allow-Origin "*"
+  # Header set X-Content-Type-Options "nosniff" # Removido para evitar bloqueios rígidos em testes
 </IfModule>

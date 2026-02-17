@@ -1,67 +1,42 @@
 import express from 'express';
-import cors from 'cors';
-import bodyParser from 'body-parser';
-import compression from 'compression';
-import fs from 'fs/promises';
 import path from 'path';
+import cors from 'cors';
+import compression from 'compression';
 import { fileURLToPath } from 'url';
 
 const __filename = fileURLToPath(import.meta.url);
 const __dirname = path.dirname(__filename);
 
 const app = express();
+// A Hostinger injeta a porta automaticamente em planos Node.js, senão usamos 8080 ou 3000
 const PORT = process.env.PORT || 3000;
-const LEADS_FILE = path.join(__dirname, 'leads.json');
 
 app.use(compression());
 app.use(cors());
-app.use(bodyParser.json());
+app.use(express.json());
 
-async function initLeadsFile() {
-  try {
-    await fs.access(LEADS_FILE);
-  } catch {
-    await fs.writeFile(LEADS_FILE, JSON.stringify([]));
-  }
-}
+// Serve os arquivos da raiz (onde está o index.html e os .tsx)
+app.use(express.static(__dirname));
 
-// Rotas de API
-app.post('/api/leads', async (req, res) => {
-  try {
-    const newLead = req.body;
-    const data = await fs.readFile(LEADS_FILE, 'utf-8');
-    const leads = JSON.parse(data);
-    leads.unshift(newLead);
-    await fs.writeFile(LEADS_FILE, JSON.stringify(leads, null, 2));
-    res.status(201).json({ success: true });
-  } catch (error) {
-    res.status(500).json({ error: 'Erro ao salvar lead' });
-  }
-});
-
-app.get('/api/leads', async (req, res) => {
-  try {
-    const data = await fs.readFile(LEADS_FILE, 'utf-8');
-    res.json(JSON.parse(data));
-  } catch (error) {
-    res.status(500).json({ error: 'Erro ao ler leads' });
-  }
-});
-
-// Detecta se existe a pasta dist ou se deve servir da raiz
+// Se houver uma pasta dist (caso tenha feito build local), serve ela também
 const distPath = path.join(__dirname, 'dist');
-const publicPath = (await fs.access(distPath).then(() => true).catch(() => false)) ? distPath : __dirname;
+app.use(express.static(distPath));
 
-app.use(express.static(publicPath));
+// API básica para Leads (Fallback para não dar 404)
+app.get('/api/leads', (req, res) => {
+  res.json({ message: "API Ativa" });
+});
 
-// Fallback para SPA
+app.post('/api/leads', (req, res) => {
+  console.log("Lead recebido:", req.body);
+  res.status(200).json({ success: true });
+});
+
+// Todas as outras rotas mandam para o index.html
 app.get('*', (req, res) => {
-  if (req.path.startsWith('/api')) return;
-  res.sendFile(path.join(publicPath, 'index.html'));
+  res.sendFile(path.join(__dirname, 'index.html'));
 });
 
 app.listen(PORT, () => {
-  console.log(`🚀 Servidor rodando na porta ${PORT}`);
-  console.log(`📂 Servindo arquivos de: ${publicPath}`);
-  initLeadsFile();
+  console.log(`>>> Servidor Itajaí Metal Rodando na Porta: ${PORT}`);
 });

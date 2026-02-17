@@ -1,36 +1,31 @@
-
 import { Lead } from "../types";
 
-// Detecta se estamos rodando localmente ou em produção
 const API_BASE = window.location.origin;
 
 export const leadService = {
   saveLead: async (leadData: Omit<Lead, 'id' | 'createdAt' | 'status'>): Promise<Lead> => {
     const newLead: Lead = {
       ...leadData,
-      id: Math.random().toString(36).substr(2, 9),
+      id: Math.random().toString(36).substring(2, 11),
       status: 'Pendente',
       createdAt: Date.now()
     };
 
-    // 1. Sempre salva localmente primeiro (Segurança máxima)
-    const localLeads = leadService.getLeadsFromLocal();
-    localStorage.setItem('imp_leads_database', JSON.stringify([newLead, ...localLeads]));
+    // Salva localmente primeiro (Segurança)
+    const local = localStorage.getItem('imp_leads_database');
+    const leads = local ? JSON.parse(local) : [];
+    localStorage.setItem('imp_leads_database', JSON.stringify([newLead, ...leads]));
 
-    // 2. Tenta sincronizar com o servidor se ele existir
+    // Tenta API
     try {
-      const response = await fetch(`${API_BASE}/api/leads`, {
+      await fetch(`${API_BASE}/api/leads`, {
         method: 'POST',
         headers: { 'Content-Type': 'application/json' },
         body: JSON.stringify(newLead),
-        signal: AbortSignal.timeout(3000) // Timeout de 3s para não travar a UI
+        signal: AbortSignal.timeout(4000)
       });
-
-      if (response.ok) {
-        console.log("Sincronizado com o servidor com sucesso.");
-      }
-    } catch (error) {
-      console.warn("Modo Offline: Lead salvo apenas no navegador.");
+    } catch (e) {
+      console.warn("API Offline, lead salvo apenas localmente.");
     }
 
     return newLead;
@@ -38,30 +33,26 @@ export const leadService = {
 
   getLeads: async (): Promise<Lead[]> => {
     try {
-      const response = await fetch(`${API_BASE}/api/leads`, { signal: AbortSignal.timeout(3000) });
-      if (response.ok) {
-        const serverData = await response.json();
-        localStorage.setItem('imp_leads_database', JSON.stringify(serverData));
-        return serverData;
-      }
-    } catch (e) {
-      console.log("Usando banco de dados local.");
-    }
-    return leadService.getLeadsFromLocal();
-  },
-
-  getLeadsFromLocal: (): Lead[] => {
-    const data = localStorage.getItem('imp_leads_database');
-    return data ? JSON.parse(data) : [];
+      const res = await fetch(`${API_BASE}/api/leads`);
+      if (res.ok) return await res.json();
+    } catch (e) {}
+    const local = localStorage.getItem('imp_leads_database');
+    return local ? JSON.parse(local) : [];
   },
 
   deleteLead: (id: string): void => {
-    const filtered = leadService.getLeadsFromLocal().filter(l => l.id !== id);
-    localStorage.setItem('imp_leads_database', JSON.stringify(filtered));
+    const local = localStorage.getItem('imp_leads_database');
+    if (local) {
+      const filtered = JSON.parse(local).filter((l: any) => l.id !== id);
+      localStorage.setItem('imp_leads_database', JSON.stringify(filtered));
+    }
   },
 
   updateStatus: (id: string, status: Lead['status']): void => {
-    const updated = leadService.getLeadsFromLocal().map(l => l.id === id ? { ...l, status } : l);
-    localStorage.setItem('imp_leads_database', JSON.stringify(updated));
+    const local = localStorage.getItem('imp_leads_database');
+    if (local) {
+      const updated = JSON.parse(local).map((l: any) => l.id === id ? { ...l, status } : l);
+      localStorage.setItem('imp_leads_database', JSON.stringify(updated));
+    }
   }
 };
