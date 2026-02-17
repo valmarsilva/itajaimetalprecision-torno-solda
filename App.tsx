@@ -1,4 +1,4 @@
-import React, { lazy, Suspense } from 'react';
+import React, { lazy, Suspense, useEffect, useState } from 'react';
 import Navbar from './components/Navbar';
 import ServiceSection from './components/ServiceSection';
 import AIQuoteAssistant from './components/AIQuoteAssistant';
@@ -12,8 +12,17 @@ const Diagnostics = lazy(() => import('./components/Diagnostics'));
 const App: React.FC = () => {
   const whatsappNumber = "5547992460045";
   const whatsappUrl = `https://wa.me/${whatsappNumber}`;
-  const siteUrl = "https://itajaimetal.com.br"; 
-  const qrCodeUrl = `https://api.qrserver.com/v1/create-qr-code/?size=150x150&data=${encodeURIComponent(siteUrl)}&color=3b82f6&bgcolor=020617`;
+  
+  // Detectar a URL atual dinamicamente para o QR Code funcionar em qualquer lugar
+  const [currentUrl, setCurrentUrl] = useState("https://itajaimetal.com.br");
+  
+  useEffect(() => {
+    if (typeof window !== 'undefined') {
+      setCurrentUrl(window.location.origin);
+    }
+  }, []);
+
+  const qrCodeUrl = `https://api.qrserver.com/v1/create-qr-code/?size=150x150&data=${encodeURIComponent(currentUrl)}&color=3b82f6&bgcolor=020617`;
 
   const scrollToServices = (e: React.MouseEvent) => {
     e.preventDefault();
