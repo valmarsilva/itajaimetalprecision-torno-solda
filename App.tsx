@@ -1,4 +1,3 @@
-
 import React, { lazy, Suspense } from 'react';
 import Navbar from './components/Navbar';
 import ServiceSection from './components/ServiceSection';
@@ -13,7 +12,7 @@ const Diagnostics = lazy(() => import('./components/Diagnostics'));
 const App: React.FC = () => {
   const whatsappNumber = "5547992460045";
   const whatsappUrl = `https://wa.me/${whatsappNumber}`;
-  const siteUrl = "https://itajaimetalprecision.com.br"; // URL fixa para o QR Code ser sempre válido
+  const siteUrl = "https://itajaimetal.com.br"; 
   const qrCodeUrl = `https://api.qrserver.com/v1/create-qr-code/?size=150x150&data=${encodeURIComponent(siteUrl)}&color=3b82f6&bgcolor=020617`;
 
   const scrollToServices = (e: React.MouseEvent) => {
@@ -29,10 +28,8 @@ const App: React.FC = () => {
       <Navbar />
 
       <section id="home" className="relative min-h-screen flex items-center overflow-hidden pt-20">
-        {/* Camada 20: Animação de Solda (Fica por cima de tudo no fundo) */}
         <WeldingBackground />
         
-        {/* Camada 10: Elementos de fundo e QR Code */}
         <div className="absolute top-0 left-1/2 -translate-x-1/2 w-full h-[600px] bg-blue-500/10 blur-[140px] rounded-full pointer-events-none z-10"></div>
         
         <div className="absolute inset-0 z-0">
@@ -44,16 +41,13 @@ const App: React.FC = () => {
           <div className="absolute inset-0 bg-gradient-to-b from-slate-950/40 via-slate-950/80 to-slate-950"></div>
         </div>
 
-        {/* QR CODE - Estilo "Placa de Identificação Técnica" */}
         <div className="absolute bottom-16 right-[38%] z-10 hidden lg:flex flex-col items-center animate-in fade-in zoom-in duration-1000 delay-700">
           <div className="relative p-4 bg-slate-900/40 backdrop-blur-md border border-slate-700/50 rounded-lg group transition-all hover:border-blue-500/40 shadow-2xl shadow-black">
-            {/* Rebites Industriais nos cantos */}
             <div className="absolute top-1 left-1 w-1 h-1 bg-slate-700 rounded-full shadow-inner"></div>
             <div className="absolute top-1 right-1 w-1 h-1 bg-slate-700 rounded-full shadow-inner"></div>
             <div className="absolute bottom-1 left-1 w-1 h-1 bg-slate-700 rounded-full shadow-inner"></div>
             <div className="absolute bottom-1 right-1 w-1 h-1 bg-slate-700 rounded-full shadow-inner"></div>
             
-            {/* Cantos de mira para foco tecnológico */}
             <div className="absolute -top-1 -left-1 w-3 h-3 border-t border-l border-blue-500/40"></div>
             <div className="absolute -bottom-1 -right-1 w-3 h-3 border-b border-r border-blue-500/40"></div>
             
@@ -62,8 +56,6 @@ const App: React.FC = () => {
               alt="QR Code do Site" 
               className="w-20 h-20 opacity-60 group-hover:opacity-100 transition-all duration-500 mix-blend-lighten"
             />
-            
-            <div className="absolute inset-0 bg-blue-500/5 opacity-0 group-hover:opacity-100 transition-opacity pointer-events-none"></div>
           </div>
           <div className="mt-4 flex flex-col items-center gap-1 opacity-50 group-hover:opacity-100 transition-opacity">
             <span className="text-[9px] font-industrial text-blue-400 uppercase tracking-[0.3em] font-bold">
@@ -162,7 +154,7 @@ const App: React.FC = () => {
       <footer className="bg-slate-950 py-16 border-t border-slate-900">
         <div className="max-w-7xl mx-auto px-4 text-center">
           <div className="font-industrial text-2xl mb-4 text-white">
-            <span className="text-blue-500">ITAJAÍ</span> METAL<span className="text-blue-500">PRECISION</span>
+            <span className="text-blue-500">ITAJAÍ</span> METAL
           </div>
           <p className="text-slate-500 text-xs mb-8 uppercase tracking-widest">
             Usinagem • Soldagem • Serviços • Valmar Silva

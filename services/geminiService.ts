@@ -1,4 +1,3 @@
-
 import { GoogleGenAI, Type } from "@google/genai";
 import { AIResponse } from "../types";
 
@@ -18,16 +17,16 @@ export const analyzeProject = async (description: string): Promise<AIResponse> =
     const ai = new GoogleGenAI({ apiKey });
     const response = await ai.models.generateContent({
       model: 'gemini-3-flash-preview',
-      contents: `Você é um especialista técnico da Itajaí Metal Precision. 
+      contents: `Você é um consultor técnico da Itajaí Metal. 
       Analise o seguinte projeto: "${description}". 
       Nossa empresa é especialista em: 
-      1. Torno e Usinagem Industrial: Fabricação e reparo de peças diversas.
+      1. Torno e Usinagem Industrial: Fabricação e reparo de peças diversas com alta qualidade.
       2. Solda MIG/TIG: Inox, Alumínio, Aço e recuperação de componentes metálicos.
-      3. Móveis Industriais e Estruturas Metálicas.
-      4. Carretinhas/Reboques: Reforma estrutural e fabricação sob medida.
-      5. Protótipos 3D: Validação técnica em materiais diversos (ABS/PETG/PLA).
+      3. Móveis Industriais e Estruturas Metálicas sob medida.
+      4. Carretinhas/Reboques: Reforma estrutural e fabricação.
+      5. Protótipos 3D: Validação prática em materiais diversos (ABS/PETG/PLA).
 
-      Determine qual categoria se encaixa melhor e sugira o processo técnico ideal para o cliente.
+      Determine qual categoria se encaixa melhor e sugira o processo técnico ideal para o cliente de forma direta.
       Responda em formato JSON.`,
       config: {
         responseMimeType: "application/json",
@@ -39,7 +38,7 @@ export const analyzeProject = async (description: string): Promise<AIResponse> =
             complexity: { 
               type: Type.STRING, 
               enum: ['Baixa', 'Média', 'Alta'],
-              description: 'Nível de complexidade do projeto.' 
+              description: 'Nível de dificuldade do projeto.' 
             },
           },
           required: ['analysis', 'suggestedProcess', 'complexity'],

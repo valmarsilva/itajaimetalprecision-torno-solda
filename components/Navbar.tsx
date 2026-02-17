@@ -1,4 +1,3 @@
-
 import React from 'react';
 import { Instagram, MessageCircle } from 'lucide-react';
 
@@ -21,10 +20,10 @@ const Navbar: React.FC = () => {
         <div className="flex justify-between items-center h-20">
           <div className="flex items-center gap-2">
             <div className="w-10 h-8 bg-blue-600 rounded-lg flex items-center justify-center font-industrial text-white font-bold text-base">
-              IMP
+              IM
             </div>
             <span className="font-industrial text-lg tracking-tighter text-white hidden sm:block">
-              <span className="text-blue-500">ITAJAÍ</span> METAL<span className="text-blue-500">PRECISION</span>
+              <span className="text-blue-500">ITAJAÍ</span> METAL
             </span>
           </div>
           

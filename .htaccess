@@ -1,12 +1,9 @@
-
-# Forçar tipos MIME corretos para módulos JavaScript
 <IfModule mod_mime.c>
   AddType application/javascript .js
   AddType application/javascript .mjs
   AddType text/css .css
 </IfModule>
 
-# Impedir que o navegador tente "adivinhar" o tipo de arquivo (evita o erro de MIME bloqueado)
 <IfModule mod_headers.c>
   Header set X-Content-Type-Options "nosniff"
 </IfModule>
@@ -24,7 +21,7 @@
   RewriteRule ^ index.html [L]
 </IfModule>
 
-# Desabilitar cache durante a fase de ajuste para garantir que as mudanças no .htaccess sejam lidas
+# Desabilitar cache temporariamente para propagar mudanças
 <IfModule mod_expires.c>
   ExpiresActive Off
 </IfModule>
