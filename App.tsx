@@ -4,7 +4,7 @@ import ServiceSection from './components/ServiceSection';
 import AIQuoteAssistant from './components/AIQuoteAssistant';
 import ContactForm from './components/ContactForm';
 import WeldingBackground from './components/WeldingBackground';
-import { Layers, MessageCircle, Truck, Cog, Sparkles, QrCode } from 'lucide-react';
+import { Layers, MessageCircle, Truck, Cog, Sparkles } from 'lucide-react';
 
 const LeadDashboard = lazy(() => import('./components/LeadDashboard'));
 const Diagnostics = lazy(() => import('./components/Diagnostics'));
@@ -13,17 +13,18 @@ const App: React.FC = () => {
   const whatsappNumber = "5547992460045";
   const whatsappUrl = `https://wa.me/${whatsappNumber}`;
   
-  // Detectar a URL atual dinamicamente para o QR Code funcionar em qualquer lugar
-  const [currentUrl, setCurrentUrl] = useState("https://itajaimetal.com.br");
+  const [currentUrl, setCurrentUrl] = useState("");
   
   useEffect(() => {
     if (typeof window !== 'undefined') {
-      // Usa a origem atual (ex: techprocursos-com...hostingersite.com)
-      setCurrentUrl(window.location.origin);
+      // Captura a URL completa atual (ajuda com endereços temporários da Hostinger)
+      setCurrentUrl(window.location.href);
     }
   }, []);
 
-  const qrCodeUrl = `https://api.qrserver.com/v1/create-qr-code/?size=150x150&data=${encodeURIComponent(currentUrl)}&color=3b82f6&bgcolor=020617`;
+  const qrCodeUrl = currentUrl 
+    ? `https://api.qrserver.com/v1/create-qr-code/?size=150x150&data=${encodeURIComponent(currentUrl)}&color=3b82f6&bgcolor=020617`
+    : "";
 
   const scrollToServices = (e: React.MouseEvent) => {
     e.preventDefault();
@@ -51,29 +52,31 @@ const App: React.FC = () => {
           <div className="absolute inset-0 bg-gradient-to-b from-slate-950/40 via-slate-950/80 to-slate-950"></div>
         </div>
 
-        <div className="absolute bottom-16 right-[38%] z-10 hidden lg:flex flex-col items-center animate-in fade-in zoom-in duration-1000 delay-700">
-          <div className="relative p-4 bg-slate-900/40 backdrop-blur-md border border-slate-700/50 rounded-lg group transition-all hover:border-blue-500/40 shadow-2xl shadow-black">
-            <div className="absolute top-1 left-1 w-1 h-1 bg-slate-700 rounded-full shadow-inner"></div>
-            <div className="absolute top-1 right-1 w-1 h-1 bg-slate-700 rounded-full shadow-inner"></div>
-            <div className="absolute bottom-1 left-1 w-1 h-1 bg-slate-700 rounded-full shadow-inner"></div>
-            <div className="absolute bottom-1 right-1 w-1 h-1 bg-slate-700 rounded-full shadow-inner"></div>
-            
-            <div className="absolute -top-1 -left-1 w-3 h-3 border-t border-l border-blue-500/40"></div>
-            <div className="absolute -bottom-1 -right-1 w-3 h-3 border-b border-r border-blue-500/40"></div>
-            
-            <img 
-              src={qrCodeUrl} 
-              alt="QR Code do Site" 
-              className="w-20 h-20 opacity-60 group-hover:opacity-100 transition-all duration-500 mix-blend-lighten"
-            />
+        {qrCodeUrl && (
+          <div className="absolute bottom-16 right-[38%] z-10 hidden lg:flex flex-col items-center animate-in fade-in zoom-in duration-1000 delay-700">
+            <div className="relative p-4 bg-slate-900/40 backdrop-blur-md border border-slate-700/50 rounded-lg group transition-all hover:border-blue-500/40 shadow-2xl shadow-black">
+              <div className="absolute top-1 left-1 w-1 h-1 bg-slate-700 rounded-full shadow-inner"></div>
+              <div className="absolute top-1 right-1 w-1 h-1 bg-slate-700 rounded-full shadow-inner"></div>
+              <div className="absolute bottom-1 left-1 w-1 h-1 bg-slate-700 rounded-full shadow-inner"></div>
+              <div className="absolute bottom-1 right-1 w-1 h-1 bg-slate-700 rounded-full shadow-inner"></div>
+              
+              <div className="absolute -top-1 -left-1 w-3 h-3 border-t border-l border-blue-500/40"></div>
+              <div className="absolute -bottom-1 -right-1 w-3 h-3 border-b border-r border-blue-500/40"></div>
+              
+              <img 
+                src={qrCodeUrl} 
+                alt="QR Code do Site" 
+                className="w-20 h-20 opacity-60 group-hover:opacity-100 transition-all duration-500 mix-blend-lighten"
+              />
+            </div>
+            <div className="mt-4 flex flex-col items-center gap-1 opacity-50 group-hover:opacity-100 transition-opacity">
+              <span className="text-[9px] font-industrial text-blue-400 uppercase tracking-[0.3em] font-bold">
+                Scan-to-Visit
+              </span>
+              <div className="h-0.5 w-8 bg-gradient-to-r from-transparent via-blue-500/50 to-transparent"></div>
+            </div>
           </div>
-          <div className="mt-4 flex flex-col items-center gap-1 opacity-50 group-hover:opacity-100 transition-opacity">
-            <span className="text-[9px] font-industrial text-blue-400 uppercase tracking-[0.3em] font-bold">
-              Scan-to-Visit
-            </span>
-            <div className="h-0.5 w-8 bg-gradient-to-r from-transparent via-blue-500/50 to-transparent"></div>
-          </div>
-        </div>
+        )}
 
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 relative z-30 w-full py-20">
           <div className="max-w-3xl">
@@ -142,7 +145,7 @@ const App: React.FC = () => {
             <h3 className="text-4xl font-industrial text-white mb-8 uppercase">Usinagem de Alta Qualidade</h3>
             <div className="grid gap-4">
               {[
-                { icon: Layers, title: "Prototipagem Ágil", desc: "Desenvolvimento rápido de peças piloto com validação de medidas." },
+                { icon: Cog, title: "Prototipagem Ágil", desc: "Desenvolvimento rápido de peças piloto com validação de medidas." },
                 { icon: Truck, title: "Manutenção de Eixos", desc: "Recuperação especializada em eixos e estruturas de reboques." },
                 { icon: Cog, title: "Recuperação de Componentes", desc: "Fabricação de peças descontinuadas a partir de amostras." }
               ].map((item, i) => (

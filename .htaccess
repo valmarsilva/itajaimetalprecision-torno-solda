@@ -1,18 +1,27 @@
+# Impede a listagem de diretórios
+Options -Indexes
+
+# Define o arquivo padrão
 DirectoryIndex index.html
 
 <IfModule mod_rewrite.c>
   RewriteEngine On
   RewriteBase /
   
-  # Se o arquivo existe (como fotos ou css), abre ele direto
+  # Redireciona para HTTPS (Opcional, mas recomendado se tiver SSL)
+  # RewriteCond %{HTTPS} off
+  # RewriteRule ^(.*)$ https://%{HTTP_HOST}%{REQUEST_URI} [L,R=301]
+
+  # Se o arquivo solicitado existe, serve ele normalmente
   RewriteCond %{REQUEST_FILENAME} -f [OR]
   RewriteCond %{REQUEST_FILENAME} -d
   RewriteRule ^ - [L]
 
-  # Se o arquivo não existe, manda pro index.html (essencial para sites React)
+  # Caso contrário, manda tudo para o index.html
   RewriteRule ^ index.html [L]
 </IfModule>
 
+# Garante que arquivos .js e .tsx sejam servidos como javascript
 <IfModule mod_mime.c>
   AddType application/javascript .js
   AddType application/javascript .mjs
