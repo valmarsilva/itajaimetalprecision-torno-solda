@@ -1,4 +1,3 @@
-
 import React, { useState, useEffect } from 'react';
 import { analyzeProject } from '../services/geminiService';
 import { AIResponse, QuoteHistoryItem } from '../types';
@@ -24,7 +23,7 @@ const AIQuoteAssistant: React.FC = () => {
 
   // Load history from localStorage on mount
   useEffect(() => {
-    const savedHistory = localStorage.getItem('metalprecision_history');
+    const savedHistory = localStorage.getItem('itajaimetal_historico');
     if (savedHistory) {
       try {
         setHistory(JSON.parse(savedHistory));
@@ -36,7 +35,7 @@ const AIQuoteAssistant: React.FC = () => {
 
   // Save history to localStorage whenever it changes
   useEffect(() => {
-    localStorage.setItem('metalprecision_history', JSON.stringify(history));
+    localStorage.setItem('itajaimetal_historico', JSON.stringify(history));
   }, [history]);
 
   const handleAnalyze = async (e: React.FormEvent) => {
@@ -80,7 +79,7 @@ const AIQuoteAssistant: React.FC = () => {
   const clearHistory = () => {
     if (window.confirm("Deseja limpar seu histórico de consultas?")) {
       setHistory([]);
-      localStorage.removeItem('metalprecision_history');
+      localStorage.removeItem('itajaimetal_historico');
     }
   };
 

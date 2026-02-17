@@ -36,8 +36,18 @@
         0%, 100% { opacity: 1; }
         50% { opacity: 0.3; }
       }
-      [id] {
-        scroll-margin-top: 100px;
+      .load-error {
+        display: none;
+        position: fixed;
+        bottom: 20px;
+        left: 50%;
+        transform: translateX(-50%);
+        background: #ef4444;
+        color: white;
+        padding: 10px 20px;
+        border-radius: 8px;
+        font-size: 12px;
+        z-index: 9999;
       }
     </style>
   <script type="importmap">
@@ -48,22 +58,34 @@
     "react/": "https://esm.sh/react@^19.2.4/",
     "@google/genai": "https://esm.sh/@google/genai@^1.41.0",
     "lucide-react": "https://esm.sh/lucide-react@^0.564.0",
-    "@vitejs/plugin-react": "https://esm.sh/@vitejs/plugin-react@^5.1.4",
     "express": "https://esm.sh/express@^5.2.1",
-    "path": "https://esm.sh/path@^0.12.7",
-    "vite": "https://esm.sh/vite@^7.3.1",
-    "fs/": "https://esm.sh/fs@^0.0.1-security/",
-    "body-parser": "https://esm.sh/body-parser@^2.2.2",
-    "url": "https://esm.sh/url@^0.11.4",
     "cors": "https://esm.sh/cors@^2.8.6",
-    "compression": "https://esm.sh/compression@^1.8.1"
+    "body-parser": "https://esm.sh/body-parser@^2.2.2",
+    "compression": "https://esm.sh/compression@^1.8.1",
+    "fs/": "https://esm.sh/fs@^0.0.1-security/",
+    "path": "https://esm.sh/path@^0.12.7",
+    "url": "https://esm.sh/url@^0.11.4",
+    "vite": "https://esm.sh/vite@^7.3.1",
+    "@vitejs/plugin-react": "https://esm.sh/@vitejs/plugin-react@^5.1.4"
   }
 }
 </script>
 </head>
   <body class="text-slate-100 antialiased overflow-x-hidden">
     <div id="root"></div>
-    <!-- No ambiente Hostinger, após o build, este caminho deve apontar para o .js gerado -->
-    <script type="module" src="./index.tsx"></script>
+    <div id="errorMessage" class="load-error font-industrial">ERRO NO CARREGAMENTO DOS MÓDULOS</div>
+    
+    <script type="module">
+      // Monitor de carregamento
+      setTimeout(() => {
+        const root = document.getElementById('root');
+        if (root && root.innerHTML === "") {
+          document.getElementById('errorMessage').style.display = 'block';
+        }
+      }, 8000);
+    </script>
+    
+    <!-- Em produção na Hostinger, o arquivo carregado deve ser o JS compilado da pasta DIST -->
+    <script type="module" src="./index.js"></script>
   </body>
 </html>
