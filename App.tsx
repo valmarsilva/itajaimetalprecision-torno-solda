@@ -17,7 +17,6 @@ const App: React.FC = () => {
   
   useEffect(() => {
     if (typeof window !== 'undefined') {
-      // Captura a URL completa atual (ajuda com endereços temporários da Hostinger)
       setCurrentUrl(window.location.href);
     }
   }, []);
@@ -118,7 +117,7 @@ const App: React.FC = () => {
       </section>
 
       <ServiceSection />
-
+      
       <ContactForm />
       
       <div className="relative">

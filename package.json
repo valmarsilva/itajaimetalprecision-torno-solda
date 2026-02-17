@@ -1,17 +1,16 @@
 {
   "name": "itajai-metal-app",
-  "version": "1.0.0",
+  "version": "1.1.0",
   "description": "Site Industrial Itajaí Metal",
   "main": "server.js",
   "type": "module",
   "scripts": {
-    "start": "node server.js",
-    "test": "echo \"Error: no test specified\" && exit 1"
+    "start": "node server.js"
   },
   "dependencies": {
-    "express": "^4.21.0",
+    "express": "^4.21.2",
     "cors": "^2.8.5",
-    "compression": "^1.7.4"
+    "compression": "^1.7.5"
   },
   "engines": {
     "node": ">=18.0.0"

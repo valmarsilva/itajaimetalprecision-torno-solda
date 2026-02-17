@@ -1,4 +1,4 @@
-# Configurações para Itajaí Metal - Hostinger
+# Configuração Itajaí Metal - Hostinger
 Options -Indexes
 DirectoryIndex index.html
 
@@ -6,30 +6,28 @@ DirectoryIndex index.html
   RewriteEngine On
   RewriteBase /
   
-  # Redirecionamento HTTPS
+  # Forçar HTTPS
   RewriteCond %{HTTPS} off
   RewriteRule ^(.*)$ https://%{HTTP_HOST}%{REQUEST_URI} [L,R=301]
 
-  # Se o arquivo existir, serve ele
+  # Se o arquivo existir no disco, entrega ele diretamente
   RewriteCond %{REQUEST_FILENAME} -f [OR]
   RewriteCond %{REQUEST_FILENAME} -d
   RewriteRule ^ - [L]
 
-  # SPA: Redireciona tudo para o index.html
+  # Caso contrário, manda para o index.html (essencial para React Router/SPA)
   RewriteRule ^ index.html [L]
 </IfModule>
 
-# FORÇAR MIME TYPES (Resolve o erro text/plain)
+# Garantir MIME Types para evitar erro text/plain
 <IfModule mod_mime.c>
   AddType application/javascript .js
   AddType application/javascript .mjs
   AddType application/javascript .tsx
   AddType application/javascript .jsx
-  AddType text/css .css
 </IfModule>
 
-# Garantir que o servidor não bloqueie os scripts
+# Desativar Sniffing para evitar que o navegador bloqueie o Babel
 <IfModule mod_headers.c>
   Header set Access-Control-Allow-Origin "*"
-  # Header set X-Content-Type-Options "nosniff" # Removido para evitar bloqueios rígidos em testes
 </IfModule>

@@ -8,7 +8,6 @@
     
     <!-- Scripts Base -->
     <script src="https://cdn.tailwindcss.com"></script>
-    <!-- Babel para ler TSX direto no navegador (Essencial para Hostinger sem Build) -->
     <script src="https://unpkg.com/@babel/standalone/babel.min.js"></script>
     
     <link rel="preconnect" href="https://fonts.googleapis.com">
@@ -20,7 +19,7 @@
       .font-industrial { font-family: 'Orbitron', sans-serif; }
       #root:empty { display: flex; align-items: center; justify-content: center; height: 100vh; background: #020617; }
       #root:empty::after {
-        content: "INICIALIZANDO ITAJAÍ METAL...";
+        content: "INICIALIZANDO SISTEMA...";
         color: #3b82f6;
         font-family: 'Orbitron', sans-serif;
         font-size: 10px;
@@ -37,18 +36,12 @@
         flex-direction: column;
         align-items: center;
         justify-content: center;
-        text-align: center;
         padding: 2rem;
       }
     </style>
 
     <script>
-      // Mock do process.env para o navegador não travar ao carregar o Gemini
-      window.process = {
-        env: {
-          API_KEY: "" // Será injetada pelo servidor ou usada via variável de ambiente
-        }
-      };
+      window.process = { env: { API_KEY: "" } };
     </script>
 
     <script type="importmap">
@@ -76,27 +69,21 @@
     <div id="root"></div>
     
     <div id="errorOverlay" class="error-overlay">
-      <h2 style="color: #ef4444; font-family: 'Orbitron';">SISTEMA OFFLINE</h2>
-      <p style="margin-top: 1rem; color: #94a3b8;">Houve um erro de carregamento de módulos na Hostinger.</p>
-      <button onclick="location.reload()" style="margin-top: 2rem; background: #3b82f6; color: white; border: none; padding: 10px 20px; border-radius: 8px; cursor: pointer; font-weight: bold;">TENTAR NOVAMENTE</button>
+      <h2 style="color: #ef4444; font-family: 'Orbitron';">ERRO DE CARREGAMENTO</h2>
+      <p style="margin-top: 1rem; color: #94a3b8; text-align: center;">Não foi possível carregar os módulos do frontend na Hostinger.</p>
+      <button onclick="location.reload()" style="margin-top: 2rem; background: #3b82f6; color: white; border: none; padding: 12px 24px; border-radius: 8px; cursor: pointer; font-weight: bold;">RECARREGAR SITE</button>
     </div>
     
-    <!-- Script Principal como Módulo Babel -->
+    <!-- Carregamento do arquivo principal usando Babel -->
     <script type="text/babel" data-type="module" src="./index.tsx"></script>
 
     <script>
-      // Verificador de carregamento
+      // Se em 10 segundos o React não montar, mostra o erro
       setTimeout(() => {
-        const root = document.getElementById('root');
-        if (root && root.innerHTML === "") {
+        if (document.getElementById('root').innerHTML === "") {
           document.getElementById('errorOverlay').style.display = 'flex';
         }
-      }, 15000);
-
-      window.onerror = function(msg, url, line) {
-        console.error("Erro de Sistema:", msg, "em", url, ":", line);
-        return false;
-      };
+      }, 10000);
     </script>
   </body>
 </html>
