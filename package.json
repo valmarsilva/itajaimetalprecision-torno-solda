@@ -1,4 +1,3 @@
-
 {
   "name": "itajai-metal-app",
   "version": "1.1.0",
@@ -6,7 +5,8 @@
   "main": "server.js",
   "type": "module",
   "scripts": {
-    "start": "node server.js"
+    "start": "node server.js",
+    "build": "echo \"No build step required\""
   },
   "dependencies": {
     "express": "^4.21.2",
