@@ -1,14 +1,10 @@
+
 {
   "name": "itajai-metal-app",
   "version": "1.1.0",
   "description": "Site Industrial Itajaí Metal",
   "main": "server.js",
   "type": "module",
-  "scripts": {
-  "start": "node server.js",
-  "build": "echo 'No build step required'"
-}
-
   "scripts": {
     "start": "node server.js"
   },
@@ -20,4 +16,4 @@
   "engines": {
     "node": ">=18.0.0"
   }
-
+}
