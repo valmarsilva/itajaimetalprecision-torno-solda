@@ -85,5 +85,61 @@
         }
       }, 10000);
     </script>
+<!-- Script de integração do chatbot Itajaimetal -->
+<script>
+  document.addEventListener("DOMContentLoaded", function() {
+    // Mensagem inicial
+    const welcomeMessage = "👋 Olá, seja bem-vindo à Itajaimetal Usinagem! Somos especialistas em torno, solda técnica (MIG/TIG), prototipagem 3D e suporte emergencial para motores diesel. Como posso ajudar você hoje?";
+
+    // Opções principais
+    const options = [
+      "📐 Orçamento de Usinagem",
+      "⚙️ Serviços de Torno e Solda",
+      "🚚 Diesel Emergencial",
+      "🔌 Elétrica",
+      "🛑 Freio / Válvulas",
+      "🖨️ Prototipagem 3D"
+    ];
+
+    // Exibir chatbot
+    const chatBox = document.createElement("div");
+    chatBox.style.position = "fixed";
+    chatBox.style.bottom = "20px";
+    chatBox.style.right = "20px";
+    chatBox.style.width = "300px";
+    chatBox.style.height = "400px";
+    chatBox.style.background = "#f9f9f9";
+    chatBox.style.border = "1px solid #ccc";
+    chatBox.style.borderRadius = "10px";
+    chatBox.style.padding = "10px";
+    chatBox.style.overflowY = "auto";
+    chatBox.style.fontFamily = "Arial, sans-serif";
+    chatBox.innerHTML = `<p>${welcomeMessage}</p>`;
+
+    // Adicionar botões de opções
+    options.forEach(opt => {
+      const btn = document.createElement("button");
+      btn.textContent = opt;
+      btn.style.display = "block";
+      btn.style.margin = "5px 0";
+      btn.style.width = "100%";
+      btn.style.padding = "8px";
+      btn.style.borderRadius = "5px";
+      btn.style.border = "none";
+      btn.style.background = "#007bff";
+      btn.style.color = "#fff";
+      btn.style.cursor = "pointer";
+      btn.onclick = () => {
+        chatBox.innerHTML += `<p><strong>Você escolheu:</strong> ${opt}</p>`;
+        chatBox.innerHTML += `<p>✅ Sua solicitação foi registrada. Nossa equipe entrará em contato em breve!</p>`;
+      };
+      chatBox.appendChild(btn);
+    });
+
+    document.body.appendChild(chatBox);
+  });
+</script>
+
+    
   </body>
 </html>
